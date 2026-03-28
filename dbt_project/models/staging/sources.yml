@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: fraud_db
+    schema: main
+    description: "Raw and cleaned fraud detection tables in DuckDB"
+    tables:
+      - name: clean_transactions
+        description: "Cleaned transaction table with engineered datetime and amount features"
+        columns:
+          - name: TransactionID
+            description: "Unique transaction identifier"
+            tests:
+              - unique
+              - not_null
+          - name: isFraud
+            description: "Target variable: 1 = fraud, 0 = legitimate"
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [0, 1]
+
+      - name: clean_identity
+        description: "Identity/device data for transactions"
+        columns:
+          - name: TransactionID
+            description: "Foreign key to clean_transactions"
+            tests:
+              - not_null

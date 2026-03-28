@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Cleaned and standardized transaction records"
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null
+      - name: is_fraud
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+      - name: transaction_amt
+        tests:
+          - not_null
+      - name: product_cd
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['W', 'H', 'C', 'S', 'R']
+
+  - name: stg_identity
+    description: "Device and identity features joined to transactions"
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+
+  - name: fraud_features
+    description: "Full feature table for model training"
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null
+      - name: is_fraud
+        tests:
+          - not_null
+
+  - name: fraud_summary
+    description: "Pre-aggregated stats for dashboard"
+    columns:
+      - name: grain
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['daily', 'product', 'card_type', 'email_domain', 'hour_of_day']
