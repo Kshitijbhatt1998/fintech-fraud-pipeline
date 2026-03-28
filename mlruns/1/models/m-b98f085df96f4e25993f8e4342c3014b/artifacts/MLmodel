@@ -1,0 +1,22 @@
+artifact_path: file:///D:/Project ideas/fintech-fraud-pipeline/fintech-fraud-pipeline/mlruns/1/models/m-b98f085df96f4e25993f8e4342c3014b/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.10.11
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.10.1
+model_id: m-b98f085df96f4e25993f8e4342c3014b
+model_size_bytes: 1935613
+model_uuid: m-b98f085df96f4e25993f8e4342c3014b
+prompts: null
+run_id: 7b80f619f3b04a198a0b105df50e033f
+utc_time_created: '2026-03-28 13:18:09.720764'
