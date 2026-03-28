@@ -1,0 +1,7 @@
+fraud_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/fraud.duckdb'
+      threads: 4
