@@ -42,7 +42,16 @@ def main():
     null_series = null_df.iloc[0]
     
     THRESHOLD = 90.0
-    cols_to_drop = null_series[null_series > THRESHOLD].index.tolist()
+    MANDATORY_COLS = {
+        'TransactionID', 'TransactionDT', 'TransactionAmt', 'ProductCD', 'isFraud',
+        'card1', 'card2', 'card3', 'card4', 'card5', 'card6',
+        'addr1', 'addr2', 'dist1', 'dist2',
+        'P_emaildomain', 'R_emaildomain',
+        'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'C13', 'C14',
+        'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12', 'D13', 'D14', 'D15'
+    }
+    
+    cols_to_drop = [c for c in null_series[null_series > THRESHOLD].index.tolist() if c not in MANDATORY_COLS]
     cols_to_keep = [c for c in all_cols if c not in cols_to_drop]
     keep_cols_sql = ", ".join([f'"{c}"' for c in cols_to_keep])
 
