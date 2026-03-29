@@ -4,3 +4,7 @@ __pycache__/
 .env
 *.pkl
 .ipynb_checkpoints/
+
+mlruns/
+models/*.pkl
+.claude/
