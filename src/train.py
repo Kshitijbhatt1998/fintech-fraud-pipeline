@@ -47,6 +47,7 @@ NUMERIC_FEATURES = [
     'D1', 'D2', 'D3', 'D4', 'D5', 'D10', 'D11', 'D15',
     'M1_enc', 'M2_enc', 'M3_enc', 'M4_enc', 'M5_enc', 'M6_enc', 'M7_enc', 'M8_enc', 'M9_enc',
     'id_01', 'id_02', 'id_03', 'id_05', 'id_06', 'id_09', 'id_11',
+    'id_13', 'id_17', 'id_19', 'id_20',
     'card1_txn_count', 'card1_avg_amt', 'card1_historical_fraud_rate',
     'email_txn_count', 'email_historical_fraud_rate',
     'is_high_risk_product', 'amt_vs_card_avg_ratio',
@@ -112,7 +113,6 @@ def train(X: pd.DataFrame, y: pd.Series) -> xgb.XGBClassifier:
         colsample_bytree=0.8,
         scale_pos_weight=scale_pos_weight,
         eval_metric='auc',
-        use_label_encoder=False,
         random_state=42,
         n_jobs=-1,
         early_stopping_rounds=30,
@@ -207,7 +207,7 @@ def main():
         for i, auc in enumerate(fold_aucs, 1):
             mlflow.log_metric(f'fold_{i}_auc', round(auc, 4))
 
-        mlflow.xgboost.log_model(model, 'xgb_model')
+        mlflow.xgboost.log_model(model, name='xgb_model')
 
         # Save model artifact
         with open(MODEL_PATH, 'wb') as f:
