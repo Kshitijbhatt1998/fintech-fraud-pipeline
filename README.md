@@ -124,5 +124,4 @@ streamlit run src/dashboard.py
 ## 📝 License
 Distributed under the MIT License.
 
----
-*Created with ❤️ by Antigravity*
+
