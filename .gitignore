@@ -8,3 +8,7 @@ __pycache__/
 mlruns/
 models/*.pkl
 .claude/
+
+mlruns/
+models/*.pkl
+.claude/
