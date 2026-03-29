@@ -12,3 +12,4 @@ models/*.pkl
 mlruns/
 models/*.pkl
 .claude/
+eat: register XGBoost fraud detection models in MLflow and add IDE launch configurations/
