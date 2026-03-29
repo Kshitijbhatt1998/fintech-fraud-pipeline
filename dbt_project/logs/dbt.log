@@ -3464,3 +3464,1642 @@ where grain is null
 [0m18:17:15.589519 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000247A6782FB0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000247A7A07D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000247A8AF77F0>]}
 [0m18:17:15.591534 [debug] [MainThread]: Flushing usage events
 [0m18:17:16.601775 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m10:54:41.165920 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C20FCF0D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C22253BE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C22253A00>]}
+
+
+============================== 10:54:41.176472 | 4f1673d2-2749-4ed0-9305-70d0c90b5c19 ==============================
+[0m10:54:41.176472 [info ] [MainThread]: Running with dbt=1.11.7
+[0m10:54:41.176472 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt run', 'use_experimental_parser': 'False', 'log_path': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project\\logs'}
+[0m10:54:42.266651 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C2131C520>]}
+[0m10:54:42.417667 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C22251EA0>]}
+[0m10:54:42.440723 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m10:54:43.142896 [debug] [MainThread]: checksum: b80718358155fc17c3559352095564dd56ada1cc1a1c0ef2e62c857e71583775, vars: {}, profile: , target: , version: 1.11.7
+[0m10:54:43.591900 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m10:54:43.592911 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m10:54:43.593911 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m10:54:43.829424 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C2383BE50>]}
+[0m10:54:44.172787 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m10:54:44.177313 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m10:54:44.298821 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C236A5C00>]}
+[0m10:54:44.299822 [info ] [MainThread]: Found 4 models, 18 data tests, 2 sources, 474 macros
+[0m10:54:44.300820 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C234AC130>]}
+[0m10:54:44.303875 [info ] [MainThread]: 
+[0m10:54:44.304897 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m10:54:44.306482 [info ] [MainThread]: 
+[0m10:54:44.307997 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m10:54:44.322951 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud'
+[0m10:54:44.741614 [debug] [ThreadPool]: Using duckdb connection "list_fraud"
+[0m10:54:44.742613 [debug] [ThreadPool]: On list_fraud: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"fraud"'
+    
+  
+  
+[0m10:54:44.743613 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m10:54:44.816399 [debug] [ThreadPool]: SQL status: OK in 0.073 seconds
+[0m10:54:44.819589 [debug] [ThreadPool]: On list_fraud: Close
+[0m10:54:44.821555 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_fraud, now create_fraud_main)
+[0m10:54:44.823551 [debug] [ThreadPool]: Creating schema "database: "fraud"
+schema: "main"
+"
+[0m10:54:44.833634 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m10:54:44.835148 [debug] [ThreadPool]: On create_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "create_fraud_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='fraud'
+        and type='sqlite'
+    
+  
+[0m10:54:44.835654 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m10:54:44.837671 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m10:54:44.840670 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m10:54:44.841733 [debug] [ThreadPool]: On create_fraud_main: BEGIN
+[0m10:54:44.842749 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m10:54:44.843748 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m10:54:44.845751 [debug] [ThreadPool]: On create_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "create_fraud_main"} */
+
+    
+    
+        create schema if not exists "fraud"."main"
+    
+[0m10:54:44.847749 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m10:54:44.850398 [debug] [ThreadPool]: On create_fraud_main: COMMIT
+[0m10:54:44.851431 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m10:54:44.852933 [debug] [ThreadPool]: On create_fraud_main: COMMIT
+[0m10:54:44.853952 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m10:54:44.855960 [debug] [ThreadPool]: On create_fraud_main: Close
+[0m10:54:44.858922 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud_main'
+[0m10:54:44.868400 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m10:54:44.869420 [debug] [ThreadPool]: On list_fraud_main: BEGIN
+[0m10:54:44.870414 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m10:54:44.872418 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m10:54:44.873407 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m10:54:44.874407 [debug] [ThreadPool]: On list_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud_main"} */
+select
+      'fraud' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'fraud'
+  
+[0m10:54:44.888680 [debug] [ThreadPool]: SQL status: OK in 0.013 seconds
+[0m10:54:44.890716 [debug] [ThreadPool]: On list_fraud_main: ROLLBACK
+[0m10:54:44.898302 [debug] [ThreadPool]: Failed to rollback 'list_fraud_main'
+[0m10:54:44.899302 [debug] [ThreadPool]: On list_fraud_main: Close
+[0m10:54:44.901305 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C232CE8C0>]}
+[0m10:54:44.902848 [debug] [MainThread]: Using duckdb connection "master"
+[0m10:54:44.903861 [debug] [MainThread]: On master: BEGIN
+[0m10:54:44.904874 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m10:54:44.905873 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m10:54:44.905873 [debug] [MainThread]: On master: COMMIT
+[0m10:54:44.908064 [debug] [MainThread]: Using duckdb connection "master"
+[0m10:54:44.908064 [debug] [MainThread]: On master: COMMIT
+[0m10:54:44.909583 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m10:54:44.911214 [debug] [MainThread]: On master: Close
+[0m10:54:44.928309 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.stg_identity
+[0m10:54:44.928309 [debug] [Thread-2 (]: Began running node model.fraud_pipeline.stg_transactions
+[0m10:54:44.929306 [info ] [Thread-1 (]: 1 of 4 START sql view model main.stg_identity .................................. [RUN]
+[0m10:54:44.931302 [info ] [Thread-2 (]: 2 of 4 START sql view model main.stg_transactions .............................. [RUN]
+[0m10:54:44.932806 [debug] [Thread-1 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_identity'
+[0m10:54:44.932806 [debug] [Thread-2 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_transactions'
+[0m10:54:44.934404 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.stg_identity
+[0m10:54:44.935954 [debug] [Thread-2 (]: Began compiling node model.fraud_pipeline.stg_transactions
+[0m10:54:44.954111 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.stg_identity"
+[0m10:54:44.960774 [debug] [Thread-2 (]: Writing injected SQL for node "model.fraud_pipeline.stg_transactions"
+[0m10:54:44.962793 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.stg_identity
+[0m10:54:44.987944 [debug] [Thread-2 (]: Began executing node model.fraud_pipeline.stg_transactions
+[0m10:54:45.012805 [debug] [Thread-1 (]: Writing runtime sql for node "model.fraud_pipeline.stg_identity"
+[0m10:54:45.017848 [debug] [Thread-2 (]: Writing runtime sql for node "model.fraud_pipeline.stg_transactions"
+[0m10:54:45.020492 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m10:54:45.021508 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m10:54:45.022508 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: BEGIN
+[0m10:54:45.023507 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: BEGIN
+[0m10:54:45.024507 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m10:54:45.025506 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m10:54:45.026507 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m10:54:45.027508 [debug] [Thread-2 (]: SQL status: OK in 0.003 seconds
+[0m10:54:45.028508 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m10:54:45.029507 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m10:54:45.031507 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+
+  
+  create view "fraud"."main"."stg_identity__dbt_tmp" as (
+    -- stg_identity: clean view of identity data
+-- id_01..id_38 are anonymized device/browser/network features
+
+SELECT
+    TransactionID AS transaction_id,
+
+    -- Numeric identity features
+    id_01, id_02, id_03, id_04, id_05, id_06, id_07, id_08, id_09, id_10,
+    id_11,
+
+    -- Categorical identity features
+    id_12, id_13, id_14, id_15, id_16, id_17, id_18, id_19, id_20,
+    id_21, id_22, id_23, id_24, id_25, id_26, id_27, id_28, id_29, id_30,
+    id_31, id_32, id_33, id_34, id_35, id_36, id_37, id_38,
+
+    -- Device info
+    DeviceType  AS device_type,
+    DeviceInfo  AS device_info
+
+FROM "fraud"."main"."clean_identity"
+  );
+
+[0m10:54:45.032508 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+
+  
+  create view "fraud"."main"."stg_transactions__dbt_tmp" as (
+    -- stg_transactions: clean view of raw transaction data
+-- Selects from clean_transactions (built in 02_data_pipeline.ipynb)
+-- Renames columns to snake_case standards, casts types
+
+SELECT
+    TransactionID       AS transaction_id,
+    TransactionDT       AS transaction_dt,
+    transaction_ts,
+    TransactionAmt      AS transaction_amt,
+    log_amt,
+    hour_of_day,
+    day_of_week,
+    ProductCD           AS product_cd,
+    has_identity,
+    isFraud             AS is_fraud,
+
+    -- Card features
+    card1, card2, card3, card4, card5, card6,
+
+    -- Address and distance
+    addr1, addr2,
+    dist1, dist2,
+
+    -- Email domains
+    P_emaildomain       AS purchaser_email_domain,
+    R_emaildomain       AS recipient_email_domain,
+
+    -- C features (counting/behavioral)
+    C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14,
+
+    -- D features (time-delta/distance)
+    D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
+
+    -- M features (encoded)
+    M1_enc, M2_enc, M3_enc, M4_enc, M5_enc, M6_enc, M7_enc, M8_enc, M9_enc
+
+FROM "fraud"."main"."clean_transactions"
+  );
+
+[0m10:54:45.033024 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m10:54:45.043069 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m10:54:45.044069 [debug] [Thread-2 (]: SQL status: OK in 0.010 seconds
+[0m10:54:45.045069 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+alter view "fraud"."main"."stg_identity__dbt_tmp" rename to "stg_identity"
+[0m10:54:45.050069 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m10:54:45.051068 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+alter view "fraud"."main"."stg_transactions__dbt_tmp" rename to "stg_transactions"
+[0m10:54:45.052573 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m10:54:45.054088 [debug] [Thread-2 (]: SQL status: OK in 0.000 seconds
+[0m10:54:45.068886 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: COMMIT
+[0m10:54:45.070931 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: COMMIT
+[0m10:54:45.071894 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m10:54:45.072925 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m10:54:45.073894 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: COMMIT
+[0m10:54:45.074930 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: COMMIT
+[0m10:54:45.080599 [debug] [Thread-1 (]: SQL status: OK in 0.005 seconds
+[0m10:54:45.089930 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m10:54:45.090904 [debug] [Thread-2 (]: SQL status: OK in 0.015 seconds
+[0m10:54:45.091901 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+
+      drop view if exists "fraud"."main"."stg_identity__dbt_backup" cascade
+    
+[0m10:54:45.097526 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m10:54:45.099531 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+
+      drop view if exists "fraud"."main"."stg_transactions__dbt_backup" cascade
+    
+[0m10:54:45.100532 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m10:54:45.101532 [debug] [Thread-2 (]: SQL status: OK in 0.000 seconds
+[0m10:54:45.107571 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: Close
+[0m10:54:45.110687 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: Close
+[0m10:54:45.120383 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C1EC16AA0>]}
+[0m10:54:45.121382 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C24DFB6D0>]}
+[0m10:54:45.122380 [info ] [Thread-1 (]: 1 of 4 OK created sql view model main.stg_identity ............................. [[32mOK[0m in 0.18s]
+[0m10:54:45.124388 [info ] [Thread-2 (]: 2 of 4 OK created sql view model main.stg_transactions ......................... [[32mOK[0m in 0.18s]
+[0m10:54:45.125380 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.stg_identity
+[0m10:54:45.127381 [debug] [Thread-2 (]: Finished running node model.fraud_pipeline.stg_transactions
+[0m10:54:45.129975 [debug] [Thread-4 (]: Began running node model.fraud_pipeline.fraud_features
+[0m10:54:45.130974 [info ] [Thread-4 (]: 3 of 4 START sql table model main.fraud_features ............................... [RUN]
+[0m10:54:45.133502 [debug] [Thread-4 (]: Acquiring new duckdb connection 'model.fraud_pipeline.fraud_features'
+[0m10:54:45.134537 [debug] [Thread-4 (]: Began compiling node model.fraud_pipeline.fraud_features
+[0m10:54:45.140362 [debug] [Thread-4 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_features"
+[0m10:54:45.142360 [debug] [Thread-4 (]: Began executing node model.fraud_pipeline.fraud_features
+[0m10:54:45.176217 [debug] [Thread-4 (]: Writing runtime sql for node "model.fraud_pipeline.fraud_features"
+[0m10:54:45.178219 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m10:54:45.179220 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: BEGIN
+[0m10:54:45.180220 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m10:54:45.181219 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m10:54:45.182728 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m10:54:45.184319 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+  
+    
+    
+
+    create  table
+      "fraud"."main"."fraud_features__dbt_tmp"
+  
+    as (
+      -- fraud_features: main feature table for model training
+-- Joins transactions + identity, adds velocity and aggregation features
+
+WITH transactions AS (
+    SELECT * FROM "fraud"."main"."stg_transactions"
+),
+
+identity AS (
+    SELECT * FROM "fraud"."main"."stg_identity"
+),
+
+-- Card velocity: count of transactions per card1 in the dataset
+-- (approximates recent activity — true windowed velocity needs ordering)
+card_stats AS (
+    SELECT
+        card1,
+        COUNT(*)                    AS card1_txn_count,
+        AVG(transaction_amt)        AS card1_avg_amt,
+        SUM(is_fraud)               AS card1_fraud_count,
+        AVG(CAST(is_fraud AS DOUBLE)) AS card1_fraud_rate
+    FROM transactions
+    GROUP BY card1
+),
+
+-- Email domain stats: historical fraud rate per purchaser email domain
+email_stats AS (
+    SELECT
+        purchaser_email_domain,
+        COUNT(*)                          AS email_txn_count,
+        AVG(CAST(is_fraud AS DOUBLE))     AS email_fraud_rate
+    FROM transactions
+    WHERE purchaser_email_domain IS NOT NULL
+    GROUP BY purchaser_email_domain
+)
+
+SELECT
+    t.transaction_id,
+    t.transaction_dt,
+    t.transaction_ts,
+    t.transaction_amt,
+    t.log_amt,
+    t.hour_of_day,
+    t.day_of_week,
+    t.product_cd,
+    t.has_identity,
+    t.is_fraud,
+
+    -- Card features
+    t.card1, t.card2, t.card3, t.card4, t.card5, t.card6,
+
+    -- Address
+    t.addr1, t.addr2, t.dist1, t.dist2,
+
+    -- Email
+    t.purchaser_email_domain,
+    t.recipient_email_domain,
+
+    -- C features
+    t.C1, t.C2, t.C3, t.C4, t.C5, t.C6, t.C7, t.C8,
+    t.C9, t.C10, t.C11, t.C12, t.C13, t.C14,
+
+    -- D features
+    t.D1, t.D2, t.D3, t.D4, t.D5, t.D10, t.D11, t.D15,
+
+    -- M encoded features
+    t.M1_enc, t.M2_enc, t.M3_enc, t.M4_enc, t.M5_enc,
+    t.M6_enc, t.M7_enc, t.M8_enc, t.M9_enc,
+
+    -- Identity features
+    i.id_01, i.id_02, i.id_03, i.id_05, i.id_06,
+    i.id_09, i.id_11, i.id_13, i.id_17, i.id_19, i.id_20,
+    i.device_type,
+
+    -- Engineered: card velocity
+    cs.card1_txn_count,
+    cs.card1_avg_amt,
+    cs.card1_fraud_rate     AS card1_historical_fraud_rate,
+
+    -- Engineered: email risk
+    es.email_txn_count,
+    es.email_fraud_rate     AS email_historical_fraud_rate,
+
+    -- Engineered: product risk indicator
+    CASE
+        WHEN t.product_cd = 'W' THEN 1 ELSE 0
+    END AS is_high_risk_product,
+
+    -- Engineered: amount vs card average
+    CASE
+        WHEN cs.card1_avg_amt > 0
+        THEN t.transaction_amt / cs.card1_avg_amt
+        ELSE NULL
+    END AS amt_vs_card_avg_ratio
+
+FROM transactions t
+LEFT JOIN identity i
+    ON t.transaction_id = i.transaction_id
+LEFT JOIN card_stats cs
+    ON t.card1 = cs.card1
+LEFT JOIN email_stats es
+    ON t.purchaser_email_domain = es.purchaser_email_domain
+    );
+  
+  
+[0m10:54:46.518270 [debug] [Thread-4 (]: SQL status: OK in 1.332 seconds
+[0m10:54:46.524576 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m10:54:46.525576 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+alter table "fraud"."main"."fraud_features__dbt_tmp" rename to "fraud_features"
+[0m10:54:46.526575 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m10:54:46.534102 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: COMMIT
+[0m10:54:46.535707 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m10:54:46.536722 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: COMMIT
+[0m10:54:49.078825 [debug] [Thread-4 (]: SQL status: OK in 2.542 seconds
+[0m10:54:49.082826 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m10:54:49.084538 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+      drop table if exists "fraud"."main"."fraud_features__dbt_backup" cascade
+    
+[0m10:54:49.086099 [debug] [Thread-4 (]: SQL status: OK in 0.000 seconds
+[0m10:54:49.089146 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: Close
+[0m10:54:49.090140 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C24E15E10>]}
+[0m10:54:49.091104 [info ] [Thread-4 (]: 3 of 4 OK created sql table model main.fraud_features .......................... [[32mOK[0m in 3.96s]
+[0m10:54:49.093141 [debug] [Thread-4 (]: Finished running node model.fraud_pipeline.fraud_features
+[0m10:54:49.094705 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.fraud_summary
+[0m10:54:49.095705 [info ] [Thread-1 (]: 4 of 4 START sql table model main.fraud_summary ................................ [RUN]
+[0m10:54:49.096709 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.stg_identity, now model.fraud_pipeline.fraud_summary)
+[0m10:54:49.097707 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.fraud_summary
+[0m10:54:49.102221 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.104878 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.fraud_summary
+[0m10:54:49.112596 [debug] [Thread-1 (]: Writing runtime sql for node "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.113596 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.116128 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: BEGIN
+[0m10:54:49.117129 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m10:54:49.118415 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m10:54:49.119413 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.120413 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+  
+    
+    
+
+    create  table
+      "fraud"."main"."fraud_summary__dbt_tmp"
+  
+    as (
+      -- fraud_summary: pre-aggregated stats for the Streamlit dashboard
+-- Refreshed by running: dbt run --select fraud_summary
+
+WITH base AS (
+    SELECT * FROM "fraud"."main"."fraud_features"
+)
+
+-- Daily summary
+SELECT
+    'daily'                             AS grain,
+    CAST(transaction_ts AS DATE)        AS dim_value,
+    COUNT(*)                            AS txn_count,
+    SUM(transaction_amt)                AS total_amt,
+    SUM(is_fraud)                       AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY CAST(transaction_ts AS DATE)
+
+UNION ALL
+
+-- By product
+SELECT
+    'product'       AS grain,
+    product_cd      AS dim_value,
+    COUNT(*)        AS txn_count,
+    SUM(transaction_amt) AS total_amt,
+    SUM(is_fraud)   AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY product_cd
+
+UNION ALL
+
+-- By card type
+SELECT
+    'card_type'     AS grain,
+    card6           AS dim_value,
+    COUNT(*)        AS txn_count,
+    SUM(transaction_amt) AS total_amt,
+    SUM(is_fraud)   AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+WHERE card6 IS NOT NULL
+GROUP BY card6
+
+UNION ALL
+
+-- By email domain (top 20 by volume)
+SELECT
+    'email_domain'          AS grain,
+    purchaser_email_domain  AS dim_value,
+    COUNT(*)                AS txn_count,
+    SUM(transaction_amt)    AS total_amt,
+    SUM(is_fraud)           AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+WHERE purchaser_email_domain IS NOT NULL
+GROUP BY purchaser_email_domain
+QUALIFY ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) <= 20
+
+UNION ALL
+
+-- By hour of day
+SELECT
+    'hour_of_day'                       AS grain,
+    CAST(hour_of_day AS VARCHAR)        AS dim_value,
+    COUNT(*)                            AS txn_count,
+    SUM(transaction_amt)                AS total_amt,
+    SUM(is_fraud)                       AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY hour_of_day
+    );
+  
+  
+[0m10:54:49.248772 [debug] [Thread-1 (]: SQL status: OK in 0.128 seconds
+[0m10:54:49.254965 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.255966 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+alter table "fraud"."main"."fraud_summary__dbt_tmp" rename to "fraud_summary"
+[0m10:54:49.257437 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m10:54:49.260680 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: COMMIT
+[0m10:54:49.261696 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.262696 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: COMMIT
+[0m10:54:49.271915 [debug] [Thread-1 (]: SQL status: OK in 0.009 seconds
+[0m10:54:49.276930 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m10:54:49.277930 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+      drop table if exists "fraud"."main"."fraud_summary__dbt_backup" cascade
+    
+[0m10:54:49.278930 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m10:54:49.281477 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: Close
+[0m10:54:49.283061 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '4f1673d2-2749-4ed0-9305-70d0c90b5c19', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C1EC16AA0>]}
+[0m10:54:49.284107 [info ] [Thread-1 (]: 4 of 4 OK created sql table model main.fraud_summary ........................... [[32mOK[0m in 0.19s]
+[0m10:54:49.285644 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.fraud_summary
+[0m10:54:49.288661 [debug] [MainThread]: Using duckdb connection "master"
+[0m10:54:49.289663 [debug] [MainThread]: On master: BEGIN
+[0m10:54:49.290662 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m10:54:49.291661 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m10:54:49.292661 [debug] [MainThread]: On master: COMMIT
+[0m10:54:49.293661 [debug] [MainThread]: Using duckdb connection "master"
+[0m10:54:49.294662 [debug] [MainThread]: On master: COMMIT
+[0m10:54:49.294662 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m10:54:49.296209 [debug] [MainThread]: On master: Close
+[0m10:54:49.297272 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m10:54:49.298257 [debug] [MainThread]: Connection 'create_fraud_main' was properly closed.
+[0m10:54:49.299272 [debug] [MainThread]: Connection 'list_fraud_main' was properly closed.
+[0m10:54:49.300220 [debug] [MainThread]: Connection 'model.fraud_pipeline.fraud_summary' was properly closed.
+[0m10:54:49.301257 [debug] [MainThread]: Connection 'model.fraud_pipeline.stg_transactions' was properly closed.
+[0m10:54:49.302215 [debug] [MainThread]: Connection 'model.fraud_pipeline.fraud_features' was properly closed.
+[0m10:54:49.302720 [info ] [MainThread]: 
+[0m10:54:49.303725 [info ] [MainThread]: Finished running 2 table models, 2 view models in 0 hours 0 minutes and 4.99 seconds (4.99s).
+[0m10:54:49.305731 [debug] [MainThread]: Command end result
+[0m10:54:49.354682 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m10:54:49.359353 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m10:54:49.376247 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\run_results.json
+[0m10:54:49.377249 [info ] [MainThread]: 
+[0m10:54:49.378248 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m10:54:49.379251 [info ] [MainThread]: 
+[0m10:54:49.380956 [info ] [MainThread]: Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=4
+[0m10:54:49.382483 [debug] [MainThread]: Command `dbt run` succeeded at 10:54:49.382483 after 8.43 seconds
+[0m10:54:49.384076 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C20FCF0D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C2134FD90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026C21378580>]}
+[0m10:54:49.385088 [debug] [MainThread]: Flushing usage events
+[0m10:54:49.871278 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m11:06:15.636367 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843B84F010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843CAD3B20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843CAD3940>]}
+
+
+============================== 11:06:15.652346 | 35ac3d89-76e3-464b-9425-31ac721dcade ==============================
+[0m11:06:15.652346 [info ] [MainThread]: Running with dbt=1.11.7
+[0m11:06:15.652346 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project', 'use_colors': 'True', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project\\logs'}
+[0m11:06:16.527289 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843CAD3CD0>]}
+[0m11:06:16.653177 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843CAD1F00>]}
+[0m11:06:16.673579 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m11:06:17.283712 [debug] [MainThread]: checksum: b80718358155fc17c3559352095564dd56ada1cc1a1c0ef2e62c857e71583775, vars: {}, profile: , target: , version: 1.11.7
+[0m11:06:17.693227 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m11:06:17.694228 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m11:06:17.695234 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m11:06:17.860634 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843E170820>]}
+[0m11:06:18.091995 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m11:06:18.091995 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m11:06:18.265056 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843DF26D70>]}
+[0m11:06:18.266014 [info ] [MainThread]: Found 4 models, 18 data tests, 2 sources, 474 macros
+[0m11:06:18.267017 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843DB9A230>]}
+[0m11:06:18.269063 [info ] [MainThread]: 
+[0m11:06:18.270062 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m11:06:18.271061 [info ] [MainThread]: 
+[0m11:06:18.272060 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m11:06:18.283742 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud'
+[0m11:06:18.606202 [debug] [ThreadPool]: Using duckdb connection "list_fraud"
+[0m11:06:18.606202 [debug] [ThreadPool]: On list_fraud: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"fraud"'
+    
+  
+  
+[0m11:06:18.606202 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m11:06:18.702191 [debug] [ThreadPool]: SQL status: OK in 0.085 seconds
+[0m11:06:18.702191 [debug] [ThreadPool]: On list_fraud: Close
+[0m11:06:18.702191 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_fraud, now create_fraud_main)
+[0m11:06:18.702191 [debug] [ThreadPool]: Creating schema "database: "fraud"
+schema: "main"
+"
+[0m11:06:18.715146 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:06:18.715146 [debug] [ThreadPool]: On create_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "create_fraud_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='fraud'
+        and type='sqlite'
+    
+  
+[0m11:06:18.715146 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m11:06:18.715146 [debug] [ThreadPool]: SQL status: OK in 0.003 seconds
+[0m11:06:18.715146 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:06:18.715146 [debug] [ThreadPool]: On create_fraud_main: BEGIN
+[0m11:06:18.715146 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m11:06:18.715146 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:06:18.730875 [debug] [ThreadPool]: On create_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "create_fraud_main"} */
+
+    
+    
+        create schema if not exists "fraud"."main"
+    
+[0m11:06:18.734040 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m11:06:18.734040 [debug] [ThreadPool]: On create_fraud_main: COMMIT
+[0m11:06:18.734040 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:06:18.734040 [debug] [ThreadPool]: On create_fraud_main: COMMIT
+[0m11:06:18.734040 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m11:06:18.734040 [debug] [ThreadPool]: On create_fraud_main: Close
+[0m11:06:18.734040 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud_main'
+[0m11:06:18.748820 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m11:06:18.748820 [debug] [ThreadPool]: On list_fraud_main: BEGIN
+[0m11:06:18.748820 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m11:06:18.748820 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m11:06:18.748820 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m11:06:18.748820 [debug] [ThreadPool]: On list_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud_main"} */
+select
+      'fraud' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'fraud'
+  
+[0m11:06:18.772997 [debug] [ThreadPool]: SQL status: OK in 0.016 seconds
+[0m11:06:18.775923 [debug] [ThreadPool]: On list_fraud_main: ROLLBACK
+[0m11:06:18.782160 [debug] [ThreadPool]: Failed to rollback 'list_fraud_main'
+[0m11:06:18.782160 [debug] [ThreadPool]: On list_fraud_main: Close
+[0m11:06:18.784757 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843DB4EC80>]}
+[0m11:06:18.785754 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:06:18.786754 [debug] [MainThread]: On master: BEGIN
+[0m11:06:18.787756 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:06:18.788754 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m11:06:18.789756 [debug] [MainThread]: On master: COMMIT
+[0m11:06:18.790755 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:06:18.791757 [debug] [MainThread]: On master: COMMIT
+[0m11:06:18.792750 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m11:06:18.792750 [debug] [MainThread]: On master: Close
+[0m11:06:18.810081 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.stg_identity
+[0m11:06:18.810081 [debug] [Thread-2 (]: Began running node model.fraud_pipeline.stg_transactions
+[0m11:06:18.812427 [info ] [Thread-1 (]: 1 of 4 START sql view model main.stg_identity .................................. [RUN]
+[0m11:06:18.812897 [info ] [Thread-2 (]: 2 of 4 START sql view model main.stg_transactions .............................. [RUN]
+[0m11:06:18.815033 [debug] [Thread-1 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_identity'
+[0m11:06:18.816031 [debug] [Thread-2 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_transactions'
+[0m11:06:18.817032 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.stg_identity
+[0m11:06:18.818031 [debug] [Thread-2 (]: Began compiling node model.fraud_pipeline.stg_transactions
+[0m11:06:18.828846 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.stg_identity"
+[0m11:06:18.832642 [debug] [Thread-2 (]: Writing injected SQL for node "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.834421 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.stg_identity
+[0m11:06:18.834421 [debug] [Thread-2 (]: Began executing node model.fraud_pipeline.stg_transactions
+[0m11:06:18.881918 [debug] [Thread-1 (]: Writing runtime sql for node "model.fraud_pipeline.stg_identity"
+[0m11:06:18.887928 [debug] [Thread-2 (]: Writing runtime sql for node "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.887928 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:06:18.887928 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.887928 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: BEGIN
+[0m11:06:18.887928 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: BEGIN
+[0m11:06:18.887928 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m11:06:18.887928 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m11:06:18.887928 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.895931 [debug] [Thread-2 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.896518 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:06:18.896518 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.896518 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+
+  
+  create view "fraud"."main"."stg_identity__dbt_tmp" as (
+    -- stg_identity: clean view of identity data
+-- id_01..id_38 are anonymized device/browser/network features
+
+SELECT
+    TransactionID AS transaction_id,
+
+    -- Numeric identity features
+    id_01, id_02, id_03, id_04, id_05, id_06, id_07, id_08, id_09, id_10,
+    id_11,
+
+    -- Categorical identity features
+    id_12, id_13, id_14, id_15, id_16, id_17, id_18, id_19, id_20,
+    id_21, id_22, id_23, id_24, id_25, id_26, id_27, id_28, id_29, id_30,
+    id_31, id_32, id_33, id_34, id_35, id_36, id_37, id_38,
+
+    -- Device info
+    DeviceType  AS device_type,
+    DeviceInfo  AS device_info
+
+FROM "fraud"."main"."clean_identity"
+  );
+
+[0m11:06:18.896518 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+
+  
+  create view "fraud"."main"."stg_transactions__dbt_tmp" as (
+    -- stg_transactions: clean view of raw transaction data
+-- Selects from clean_transactions (built in 02_data_pipeline.ipynb)
+-- Renames columns to snake_case standards, casts types
+
+SELECT
+    TransactionID       AS transaction_id,
+    TransactionDT       AS transaction_dt,
+    transaction_ts,
+    TransactionAmt      AS transaction_amt,
+    log_amt,
+    hour_of_day,
+    day_of_week,
+    ProductCD           AS product_cd,
+    has_identity,
+    isFraud             AS is_fraud,
+
+    -- Card features
+    card1, card2, card3, card4, card5, card6,
+
+    -- Address and distance
+    addr1, addr2,
+    dist1, dist2,
+
+    -- Email domains
+    P_emaildomain       AS purchaser_email_domain,
+    R_emaildomain       AS recipient_email_domain,
+
+    -- C features (counting/behavioral)
+    C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14,
+
+    -- D features (time-delta/distance)
+    D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
+
+    -- M features (encoded)
+    M1_enc, M2_enc, M3_enc, M4_enc, M5_enc, M6_enc, M7_enc, M8_enc, M9_enc
+
+FROM "fraud"."main"."clean_transactions"
+  );
+
+[0m11:06:18.896518 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.896518 [debug] [Thread-2 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.896518 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:06:18.912009 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.912009 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+alter view "fraud"."main"."stg_identity__dbt_tmp" rename to "stg_identity"
+[0m11:06:18.912009 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+alter view "fraud"."main"."stg_transactions__dbt_tmp" rename to "stg_transactions"
+[0m11:06:18.912009 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.912009 [debug] [Thread-2 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.933740 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: COMMIT
+[0m11:06:18.933740 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: COMMIT
+[0m11:06:18.933740 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:06:18.933740 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.933740 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: COMMIT
+[0m11:06:18.933740 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: COMMIT
+[0m11:06:18.948909 [debug] [Thread-1 (]: SQL status: OK in 0.005 seconds
+[0m11:06:18.958896 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:06:18.960042 [debug] [Thread-2 (]: SQL status: OK in 0.015 seconds
+[0m11:06:18.960568 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+
+      drop view if exists "fraud"."main"."stg_identity__dbt_backup" cascade
+    
+[0m11:06:18.960568 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:06:18.960568 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:06:18.960568 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+
+      drop view if exists "fraud"."main"."stg_transactions__dbt_backup" cascade
+    
+[0m11:06:18.960568 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: Close
+[0m11:06:18.960568 [debug] [Thread-2 (]: SQL status: OK in 0.000 seconds
+[0m11:06:18.979443 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: Close
+[0m11:06:18.983921 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028439498CD0>]}
+[0m11:06:18.984929 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843F67B970>]}
+[0m11:06:18.985875 [info ] [Thread-1 (]: 1 of 4 OK created sql view model main.stg_identity ............................. [[32mOK[0m in 0.16s]
+[0m11:06:18.985875 [info ] [Thread-2 (]: 2 of 4 OK created sql view model main.stg_transactions ......................... [[32mOK[0m in 0.17s]
+[0m11:06:18.985875 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.stg_identity
+[0m11:06:18.985875 [debug] [Thread-2 (]: Finished running node model.fraud_pipeline.stg_transactions
+[0m11:06:18.985875 [debug] [Thread-4 (]: Began running node model.fraud_pipeline.fraud_features
+[0m11:06:18.985875 [info ] [Thread-4 (]: 3 of 4 START sql table model main.fraud_features ............................... [RUN]
+[0m11:06:18.985875 [debug] [Thread-4 (]: Acquiring new duckdb connection 'model.fraud_pipeline.fraud_features'
+[0m11:06:18.985875 [debug] [Thread-4 (]: Began compiling node model.fraud_pipeline.fraud_features
+[0m11:06:18.985875 [debug] [Thread-4 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_features"
+[0m11:06:19.002000 [debug] [Thread-4 (]: Began executing node model.fraud_pipeline.fraud_features
+[0m11:06:19.016528 [debug] [Thread-4 (]: Writing runtime sql for node "model.fraud_pipeline.fraud_features"
+[0m11:06:19.016528 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:06:19.016528 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: BEGIN
+[0m11:06:19.032408 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m11:06:19.033918 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m11:06:19.033918 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:06:19.033918 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+  
+    
+    
+
+    create  table
+      "fraud"."main"."fraud_features__dbt_tmp"
+  
+    as (
+      -- fraud_features: main feature table for model training
+-- Joins transactions + identity, adds velocity and aggregation features
+
+WITH transactions AS (
+    SELECT * FROM "fraud"."main"."stg_transactions"
+),
+
+identity AS (
+    SELECT * FROM "fraud"."main"."stg_identity"
+),
+
+-- Card velocity: count of transactions per card1 in the dataset
+-- (approximates recent activity — true windowed velocity needs ordering)
+card_stats AS (
+    SELECT
+        card1,
+        COUNT(*)                    AS card1_txn_count,
+        AVG(transaction_amt)        AS card1_avg_amt,
+        SUM(is_fraud)               AS card1_fraud_count,
+        AVG(CAST(is_fraud AS DOUBLE)) AS card1_fraud_rate
+    FROM transactions
+    GROUP BY card1
+),
+
+-- Email domain stats: historical fraud rate per purchaser email domain
+email_stats AS (
+    SELECT
+        purchaser_email_domain,
+        COUNT(*)                          AS email_txn_count,
+        AVG(CAST(is_fraud AS DOUBLE))     AS email_fraud_rate
+    FROM transactions
+    WHERE purchaser_email_domain IS NOT NULL
+    GROUP BY purchaser_email_domain
+)
+
+SELECT
+    t.transaction_id,
+    t.transaction_dt,
+    t.transaction_ts,
+    t.transaction_amt,
+    t.log_amt,
+    t.hour_of_day,
+    t.day_of_week,
+    t.product_cd,
+    t.has_identity,
+    t.is_fraud,
+
+    -- Card features
+    t.card1, t.card2, t.card3, t.card4, t.card5, t.card6,
+
+    -- Address
+    t.addr1, t.addr2, t.dist1, t.dist2,
+
+    -- Email
+    t.purchaser_email_domain,
+    t.recipient_email_domain,
+
+    -- C features
+    t.C1, t.C2, t.C3, t.C4, t.C5, t.C6, t.C7, t.C8,
+    t.C9, t.C10, t.C11, t.C12, t.C13, t.C14,
+
+    -- D features
+    t.D1, t.D2, t.D3, t.D4, t.D5, t.D10, t.D11, t.D15,
+
+    -- M encoded features
+    t.M1_enc, t.M2_enc, t.M3_enc, t.M4_enc, t.M5_enc,
+    t.M6_enc, t.M7_enc, t.M8_enc, t.M9_enc,
+
+    -- Identity features
+    i.id_01, i.id_02, i.id_03, i.id_05, i.id_06,
+    i.id_09, i.id_11, i.id_13, i.id_17, i.id_19, i.id_20,
+    i.device_type,
+
+    -- Engineered: card velocity
+    cs.card1_txn_count,
+    cs.card1_avg_amt,
+    cs.card1_fraud_rate     AS card1_historical_fraud_rate,
+
+    -- Engineered: email risk
+    es.email_txn_count,
+    es.email_fraud_rate     AS email_historical_fraud_rate,
+
+    -- Engineered: product risk indicator
+    CASE
+        WHEN t.product_cd = 'W' THEN 1 ELSE 0
+    END AS is_high_risk_product,
+
+    -- Engineered: amount vs card average
+    CASE
+        WHEN cs.card1_avg_amt > 0
+        THEN t.transaction_amt / cs.card1_avg_amt
+        ELSE NULL
+    END AS amt_vs_card_avg_ratio
+
+FROM transactions t
+LEFT JOIN identity i
+    ON t.transaction_id = i.transaction_id
+LEFT JOIN card_stats cs
+    ON t.card1 = cs.card1
+LEFT JOIN email_stats es
+    ON t.purchaser_email_domain = es.purchaser_email_domain
+    );
+  
+  
+[0m11:06:20.327683 [debug] [Thread-4 (]: SQL status: OK in 1.290 seconds
+[0m11:06:20.333710 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:06:20.333710 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+alter table "fraud"."main"."fraud_features__dbt_tmp" rename to "fraud_features"
+[0m11:06:20.341767 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m11:06:20.350068 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: COMMIT
+[0m11:06:20.350068 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:06:20.350068 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: COMMIT
+[0m11:06:22.800658 [debug] [Thread-4 (]: SQL status: OK in 2.444 seconds
+[0m11:06:22.807654 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:06:22.807654 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+      drop table if exists "fraud"."main"."fraud_features__dbt_backup" cascade
+    
+[0m11:06:22.807654 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m11:06:22.823363 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: Close
+[0m11:06:22.823363 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843F691D50>]}
+[0m11:06:22.833628 [info ] [Thread-4 (]: 3 of 4 OK created sql table model main.fraud_features .......................... [[32mOK[0m in 3.84s]
+[0m11:06:22.833628 [debug] [Thread-4 (]: Finished running node model.fraud_pipeline.fraud_features
+[0m11:06:22.839849 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.fraud_summary
+[0m11:06:22.839849 [info ] [Thread-1 (]: 4 of 4 START sql table model main.fraud_summary ................................ [RUN]
+[0m11:06:22.839849 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.stg_identity, now model.fraud_pipeline.fraud_summary)
+[0m11:06:22.851542 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.fraud_summary
+[0m11:06:22.865739 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_summary"
+[0m11:06:22.870865 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.fraud_summary
+[0m11:06:22.884025 [debug] [Thread-1 (]: Writing runtime sql for node "model.fraud_pipeline.fraud_summary"
+[0m11:06:22.884025 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:06:22.884025 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: BEGIN
+[0m11:06:22.884025 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m11:06:22.884025 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:06:22.884025 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:06:22.884025 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+  
+    
+    
+
+    create  table
+      "fraud"."main"."fraud_summary__dbt_tmp"
+  
+    as (
+      -- fraud_summary: pre-aggregated stats for the Streamlit dashboard
+-- Refreshed by running: dbt run --select fraud_summary
+
+WITH base AS (
+    SELECT * FROM "fraud"."main"."fraud_features"
+)
+
+-- Daily summary
+SELECT
+    'daily'                             AS grain,
+    CAST(transaction_ts AS DATE)        AS dim_value,
+    COUNT(*)                            AS txn_count,
+    SUM(transaction_amt)                AS total_amt,
+    SUM(is_fraud)                       AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY CAST(transaction_ts AS DATE)
+
+UNION ALL
+
+-- By product
+SELECT
+    'product'       AS grain,
+    product_cd      AS dim_value,
+    COUNT(*)        AS txn_count,
+    SUM(transaction_amt) AS total_amt,
+    SUM(is_fraud)   AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY product_cd
+
+UNION ALL
+
+-- By card type
+SELECT
+    'card_type'     AS grain,
+    card6           AS dim_value,
+    COUNT(*)        AS txn_count,
+    SUM(transaction_amt) AS total_amt,
+    SUM(is_fraud)   AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+WHERE card6 IS NOT NULL
+GROUP BY card6
+
+UNION ALL
+
+-- By email domain (top 20 by volume)
+SELECT
+    'email_domain'          AS grain,
+    purchaser_email_domain  AS dim_value,
+    COUNT(*)                AS txn_count,
+    SUM(transaction_amt)    AS total_amt,
+    SUM(is_fraud)           AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+WHERE purchaser_email_domain IS NOT NULL
+GROUP BY purchaser_email_domain
+QUALIFY ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) <= 20
+
+UNION ALL
+
+-- By hour of day
+SELECT
+    'hour_of_day'                       AS grain,
+    CAST(hour_of_day AS VARCHAR)        AS dim_value,
+    COUNT(*)                            AS txn_count,
+    SUM(transaction_amt)                AS total_amt,
+    SUM(is_fraud)                       AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY hour_of_day
+    );
+  
+  
+[0m11:06:23.029523 [debug] [Thread-1 (]: SQL status: OK in 0.131 seconds
+[0m11:06:23.033772 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:06:23.033772 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+alter table "fraud"."main"."fraud_summary__dbt_tmp" rename to "fraud_summary"
+[0m11:06:23.033772 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m11:06:23.033772 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: COMMIT
+[0m11:06:23.033772 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:06:23.045058 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: COMMIT
+[0m11:06:23.052771 [debug] [Thread-1 (]: SQL status: OK in 0.008 seconds
+[0m11:06:23.052771 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:06:23.052771 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+      drop table if exists "fraud"."main"."fraud_summary__dbt_backup" cascade
+    
+[0m11:06:23.061038 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m11:06:23.061038 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: Close
+[0m11:06:23.061038 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '35ac3d89-76e3-464b-9425-31ac721dcade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843F6D43D0>]}
+[0m11:06:23.061038 [info ] [Thread-1 (]: 4 of 4 OK created sql table model main.fraud_summary ........................... [[32mOK[0m in 0.22s]
+[0m11:06:23.061038 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.fraud_summary
+[0m11:06:23.061038 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:06:23.061038 [debug] [MainThread]: On master: BEGIN
+[0m11:06:23.061038 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m11:06:23.061038 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m11:06:23.061038 [debug] [MainThread]: On master: COMMIT
+[0m11:06:23.061038 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:06:23.061038 [debug] [MainThread]: On master: COMMIT
+[0m11:06:23.076715 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m11:06:23.076715 [debug] [MainThread]: On master: Close
+[0m11:06:23.076715 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m11:06:23.076715 [debug] [MainThread]: Connection 'create_fraud_main' was properly closed.
+[0m11:06:23.076715 [debug] [MainThread]: Connection 'list_fraud_main' was properly closed.
+[0m11:06:23.076715 [debug] [MainThread]: Connection 'model.fraud_pipeline.fraud_summary' was properly closed.
+[0m11:06:23.076715 [debug] [MainThread]: Connection 'model.fraud_pipeline.stg_transactions' was properly closed.
+[0m11:06:23.076715 [debug] [MainThread]: Connection 'model.fraud_pipeline.fraud_features' was properly closed.
+[0m11:06:23.083704 [info ] [MainThread]: 
+[0m11:06:23.083704 [info ] [MainThread]: Finished running 2 table models, 2 view models in 0 hours 0 minutes and 4.80 seconds (4.80s).
+[0m11:06:23.083704 [debug] [MainThread]: Command end result
+[0m11:06:23.133728 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m11:06:23.136320 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m11:06:23.152351 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\run_results.json
+[0m11:06:23.152873 [info ] [MainThread]: 
+[0m11:06:23.152873 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m11:06:23.152873 [info ] [MainThread]: 
+[0m11:06:23.152873 [info ] [MainThread]: Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=4
+[0m11:06:23.152873 [debug] [MainThread]: Command `dbt run` succeeded at 11:06:23.152873 after 7.73 seconds
+[0m11:06:23.152873 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843B84F010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028438A9B970>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002843CA8C5E0>]}
+[0m11:06:23.152873 [debug] [MainThread]: Flushing usage events
+[0m11:06:24.119795 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m11:11:45.972097 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C65F5F010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C671E3B20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C671E3940>]}
+
+
+============================== 11:11:45.974840 | 6f50724e-95f6-4175-842a-33df71866b21 ==============================
+[0m11:11:45.974840 [info ] [MainThread]: Running with dbt=1.11.7
+[0m11:11:45.974840 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project\\logs'}
+[0m11:11:46.521564 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C671E3CD0>]}
+[0m11:11:46.629004 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C671E1F00>]}
+[0m11:11:46.643538 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m11:11:47.195184 [debug] [MainThread]: checksum: b80718358155fc17c3559352095564dd56ada1cc1a1c0ef2e62c857e71583775, vars: {}, profile: , target: , version: 1.11.7
+[0m11:11:47.530441 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m11:11:47.530441 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m11:11:47.530441 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m11:11:47.683703 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C68880820>]}
+[0m11:11:47.896187 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m11:11:47.900202 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m11:11:47.933045 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C68636D70>]}
+[0m11:11:47.933045 [info ] [MainThread]: Found 4 models, 18 data tests, 2 sources, 474 macros
+[0m11:11:47.933045 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C682B6230>]}
+[0m11:11:47.939735 [info ] [MainThread]: 
+[0m11:11:47.940492 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m11:11:47.940492 [info ] [MainThread]: 
+[0m11:11:47.940492 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m11:11:47.944598 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud'
+[0m11:11:48.190879 [debug] [ThreadPool]: Using duckdb connection "list_fraud"
+[0m11:11:48.190879 [debug] [ThreadPool]: On list_fraud: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"fraud"'
+    
+  
+  
+[0m11:11:48.190879 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m11:11:48.259940 [debug] [ThreadPool]: SQL status: OK in 0.064 seconds
+[0m11:11:48.261935 [debug] [ThreadPool]: On list_fraud: Close
+[0m11:11:48.263942 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_fraud, now create_fraud_main)
+[0m11:11:48.263942 [debug] [ThreadPool]: Creating schema "database: "fraud"
+schema: "main"
+"
+[0m11:11:48.275961 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:11:48.276965 [debug] [ThreadPool]: On create_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "create_fraud_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='fraud'
+        and type='sqlite'
+    
+  
+[0m11:11:48.277961 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m11:11:48.279960 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m11:11:48.282960 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:11:48.283960 [debug] [ThreadPool]: On create_fraud_main: BEGIN
+[0m11:11:48.284627 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m11:11:48.285669 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:11:48.286678 [debug] [ThreadPool]: On create_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "create_fraud_main"} */
+
+    
+    
+        create schema if not exists "fraud"."main"
+    
+[0m11:11:48.287671 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m11:11:48.289666 [debug] [ThreadPool]: On create_fraud_main: COMMIT
+[0m11:11:48.290635 [debug] [ThreadPool]: Using duckdb connection "create_fraud_main"
+[0m11:11:48.290635 [debug] [ThreadPool]: On create_fraud_main: COMMIT
+[0m11:11:48.291636 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m11:11:48.292636 [debug] [ThreadPool]: On create_fraud_main: Close
+[0m11:11:48.294643 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud_main'
+[0m11:11:48.304672 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m11:11:48.305645 [debug] [ThreadPool]: On list_fraud_main: BEGIN
+[0m11:11:48.305645 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m11:11:48.307693 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m11:11:48.307693 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m11:11:48.308823 [debug] [ThreadPool]: On list_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud_main"} */
+select
+      'fraud' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'fraud'
+  
+[0m11:11:48.317036 [debug] [ThreadPool]: SQL status: OK in 0.007 seconds
+[0m11:11:48.319042 [debug] [ThreadPool]: On list_fraud_main: ROLLBACK
+[0m11:11:48.321036 [debug] [ThreadPool]: Failed to rollback 'list_fraud_main'
+[0m11:11:48.322008 [debug] [ThreadPool]: On list_fraud_main: Close
+[0m11:11:48.324583 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C6825AC80>]}
+[0m11:11:48.325627 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:11:48.326632 [debug] [MainThread]: On master: BEGIN
+[0m11:11:48.327589 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:11:48.328587 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m11:11:48.329599 [debug] [MainThread]: On master: COMMIT
+[0m11:11:48.331013 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:11:48.331626 [debug] [MainThread]: On master: COMMIT
+[0m11:11:48.333634 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m11:11:48.334665 [debug] [MainThread]: On master: Close
+[0m11:11:48.340691 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.stg_identity
+[0m11:11:48.341663 [debug] [Thread-2 (]: Began running node model.fraud_pipeline.stg_transactions
+[0m11:11:48.342670 [info ] [Thread-1 (]: 1 of 4 START sql view model main.stg_identity .................................. [RUN]
+[0m11:11:48.343675 [info ] [Thread-2 (]: 2 of 4 START sql view model main.stg_transactions .............................. [RUN]
+[0m11:11:48.345183 [debug] [Thread-1 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_identity'
+[0m11:11:48.347221 [debug] [Thread-2 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_transactions'
+[0m11:11:48.348189 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.stg_identity
+[0m11:11:48.349201 [debug] [Thread-2 (]: Began compiling node model.fraud_pipeline.stg_transactions
+[0m11:11:48.349994 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.stg_identity"
+[0m11:11:48.349994 [debug] [Thread-2 (]: Writing injected SQL for node "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.365176 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.stg_identity
+[0m11:11:48.365176 [debug] [Thread-2 (]: Began executing node model.fraud_pipeline.stg_transactions
+[0m11:11:48.396939 [debug] [Thread-1 (]: Writing runtime sql for node "model.fraud_pipeline.stg_identity"
+[0m11:11:48.412914 [debug] [Thread-2 (]: Writing runtime sql for node "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.412914 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:11:48.412914 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.412914 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: BEGIN
+[0m11:11:48.412914 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: BEGIN
+[0m11:11:48.412914 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m11:11:48.412914 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m11:11:48.412914 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m11:11:48.424960 [debug] [Thread-2 (]: SQL status: OK in 0.003 seconds
+[0m11:11:48.424960 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:11:48.424960 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.424960 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+
+  
+  create view "fraud"."main"."stg_identity__dbt_tmp" as (
+    -- stg_identity: clean view of identity data
+-- id_01..id_38 are anonymized device/browser/network features
+
+SELECT
+    TransactionID AS transaction_id,
+
+    -- Numeric identity features
+    id_01, id_02, id_03, id_04, id_05, id_06, id_07, id_08, id_09, id_10,
+    id_11,
+
+    -- Categorical identity features
+    id_12, id_13, id_14, id_15, id_16, id_17, id_18, id_19, id_20,
+    id_21, id_22, id_23, id_24, id_25, id_26, id_27, id_28, id_29, id_30,
+    id_31, id_32, id_33, id_34, id_35, id_36, id_37, id_38,
+
+    -- Device info
+    DeviceType  AS device_type,
+    DeviceInfo  AS device_info
+
+FROM "fraud"."main"."clean_identity"
+  );
+
+[0m11:11:48.428829 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+
+  
+  create view "fraud"."main"."stg_transactions__dbt_tmp" as (
+    -- stg_transactions: clean view of raw transaction data
+-- Selects from clean_transactions (built in 02_data_pipeline.ipynb)
+-- Renames columns to snake_case standards, casts types
+
+SELECT
+    TransactionID       AS transaction_id,
+    TransactionDT       AS transaction_dt,
+    transaction_ts,
+    TransactionAmt      AS transaction_amt,
+    log_amt,
+    hour_of_day,
+    day_of_week,
+    ProductCD           AS product_cd,
+    has_identity,
+    isFraud             AS is_fraud,
+
+    -- Card features
+    card1, card2, card3, card4, card5, card6,
+
+    -- Address and distance
+    addr1, addr2,
+    dist1, dist2,
+
+    -- Email domains
+    P_emaildomain       AS purchaser_email_domain,
+    R_emaildomain       AS recipient_email_domain,
+
+    -- C features (counting/behavioral)
+    C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14,
+
+    -- D features (time-delta/distance)
+    D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15,
+
+    -- M features (encoded)
+    M1_enc, M2_enc, M3_enc, M4_enc, M5_enc, M6_enc, M7_enc, M8_enc, M9_enc
+
+FROM "fraud"."main"."clean_transactions"
+  );
+
+[0m11:11:48.429393 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m11:11:48.429393 [debug] [Thread-2 (]: SQL status: OK in 0.001 seconds
+[0m11:11:48.429393 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:11:48.444556 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.445700 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+alter view "fraud"."main"."stg_identity" rename to "stg_identity__dbt_backup"
+[0m11:11:48.446707 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+alter view "fraud"."main"."stg_transactions" rename to "stg_transactions__dbt_backup"
+[0m11:11:48.448719 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m11:11:48.449707 [debug] [Thread-2 (]: SQL status: OK in 0.001 seconds
+[0m11:11:48.453707 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:11:48.455708 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.455708 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+alter view "fraud"."main"."stg_identity__dbt_tmp" rename to "stg_identity"
+[0m11:11:48.455708 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+alter view "fraud"."main"."stg_transactions__dbt_tmp" rename to "stg_transactions"
+[0m11:11:48.455708 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m11:11:48.455708 [debug] [Thread-2 (]: SQL status: OK in 0.000 seconds
+[0m11:11:48.474591 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: COMMIT
+[0m11:11:48.474591 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: COMMIT
+[0m11:11:48.487859 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:11:48.488709 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.489783 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: COMMIT
+[0m11:11:48.490785 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: COMMIT
+[0m11:11:48.494480 [debug] [Thread-1 (]: SQL status: OK in 0.003 seconds
+[0m11:11:48.503436 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.stg_identity"
+[0m11:11:48.503436 [debug] [Thread-2 (]: SQL status: OK in 0.013 seconds
+[0m11:11:48.503436 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_identity"} */
+
+      drop view if exists "fraud"."main"."stg_identity__dbt_backup" cascade
+    
+[0m11:11:48.503436 [debug] [Thread-2 (]: Using duckdb connection "model.fraud_pipeline.stg_transactions"
+[0m11:11:48.512459 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.stg_transactions"} */
+
+      drop view if exists "fraud"."main"."stg_transactions__dbt_backup" cascade
+    
+[0m11:11:48.513650 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:11:48.515163 [debug] [Thread-1 (]: On model.fraud_pipeline.stg_identity: Close
+[0m11:11:48.515163 [debug] [Thread-2 (]: SQL status: OK in 0.005 seconds
+[0m11:11:48.519534 [debug] [Thread-2 (]: On model.fraud_pipeline.stg_transactions: Close
+[0m11:11:48.524526 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C63BA8CD0>]}
+[0m11:11:48.524526 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C688D8EB0>]}
+[0m11:11:48.524526 [info ] [Thread-1 (]: 1 of 4 OK created sql view model main.stg_identity ............................. [[32mOK[0m in 0.17s]
+[0m11:11:48.524526 [info ] [Thread-2 (]: 2 of 4 OK created sql view model main.stg_transactions ......................... [[32mOK[0m in 0.18s]
+[0m11:11:48.524526 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.stg_identity
+[0m11:11:48.524526 [debug] [Thread-2 (]: Finished running node model.fraud_pipeline.stg_transactions
+[0m11:11:48.524526 [debug] [Thread-4 (]: Began running node model.fraud_pipeline.fraud_features
+[0m11:11:48.524526 [info ] [Thread-4 (]: 3 of 4 START sql table model main.fraud_features ............................... [RUN]
+[0m11:11:48.524526 [debug] [Thread-4 (]: Acquiring new duckdb connection 'model.fraud_pipeline.fraud_features'
+[0m11:11:48.535917 [debug] [Thread-4 (]: Began compiling node model.fraud_pipeline.fraud_features
+[0m11:11:48.535917 [debug] [Thread-4 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_features"
+[0m11:11:48.535917 [debug] [Thread-4 (]: Began executing node model.fraud_pipeline.fraud_features
+[0m11:11:48.575550 [debug] [Thread-4 (]: Writing runtime sql for node "model.fraud_pipeline.fraud_features"
+[0m11:11:48.575550 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:48.575550 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: BEGIN
+[0m11:11:48.575550 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m11:11:48.582314 [debug] [Thread-4 (]: SQL status: OK in 0.002 seconds
+[0m11:11:48.583407 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:48.583953 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+  
+    
+    
+
+    create  table
+      "fraud"."main"."fraud_features__dbt_tmp"
+  
+    as (
+      -- fraud_features: main feature table for model training
+-- Joins transactions + identity, adds velocity and aggregation features
+
+WITH transactions AS (
+    SELECT * FROM "fraud"."main"."stg_transactions"
+),
+
+identity AS (
+    SELECT * FROM "fraud"."main"."stg_identity"
+),
+
+-- Card velocity: count of transactions per card1 in the dataset
+-- (approximates recent activity — true windowed velocity needs ordering)
+card_stats AS (
+    SELECT
+        card1,
+        COUNT(*)                    AS card1_txn_count,
+        AVG(transaction_amt)        AS card1_avg_amt,
+        SUM(is_fraud)               AS card1_fraud_count,
+        AVG(CAST(is_fraud AS DOUBLE)) AS card1_fraud_rate
+    FROM transactions
+    GROUP BY card1
+),
+
+-- Email domain stats: historical fraud rate per purchaser email domain
+email_stats AS (
+    SELECT
+        purchaser_email_domain,
+        COUNT(*)                          AS email_txn_count,
+        AVG(CAST(is_fraud AS DOUBLE))     AS email_fraud_rate
+    FROM transactions
+    WHERE purchaser_email_domain IS NOT NULL
+    GROUP BY purchaser_email_domain
+)
+
+SELECT
+    t.transaction_id,
+    t.transaction_dt,
+    t.transaction_ts,
+    t.transaction_amt,
+    t.log_amt,
+    t.hour_of_day,
+    t.day_of_week,
+    t.product_cd,
+    t.has_identity,
+    t.is_fraud,
+
+    -- Card features
+    t.card1, t.card2, t.card3, t.card4, t.card5, t.card6,
+
+    -- Address
+    t.addr1, t.addr2, t.dist1, t.dist2,
+
+    -- Email
+    t.purchaser_email_domain,
+    t.recipient_email_domain,
+
+    -- C features
+    t.C1, t.C2, t.C3, t.C4, t.C5, t.C6, t.C7, t.C8,
+    t.C9, t.C10, t.C11, t.C12, t.C13, t.C14,
+
+    -- D features
+    t.D1, t.D2, t.D3, t.D4, t.D5, t.D10, t.D11, t.D15,
+
+    -- M encoded features
+    t.M1_enc, t.M2_enc, t.M3_enc, t.M4_enc, t.M5_enc,
+    t.M6_enc, t.M7_enc, t.M8_enc, t.M9_enc,
+
+    -- Identity features
+    i.id_01, i.id_02, i.id_03, i.id_05, i.id_06,
+    i.id_09, i.id_11, i.id_13, i.id_17, i.id_19, i.id_20,
+    i.device_type,
+
+    -- Engineered: card velocity
+    cs.card1_txn_count,
+    cs.card1_avg_amt,
+    cs.card1_fraud_rate     AS card1_historical_fraud_rate,
+
+    -- Engineered: email risk
+    es.email_txn_count,
+    es.email_fraud_rate     AS email_historical_fraud_rate,
+
+    -- Engineered: product risk indicator
+    CASE
+        WHEN t.product_cd = 'W' THEN 1 ELSE 0
+    END AS is_high_risk_product,
+
+    -- Engineered: amount vs card average
+    CASE
+        WHEN cs.card1_avg_amt > 0
+        THEN t.transaction_amt / cs.card1_avg_amt
+        ELSE NULL
+    END AS amt_vs_card_avg_ratio
+
+FROM transactions t
+LEFT JOIN identity i
+    ON t.transaction_id = i.transaction_id
+LEFT JOIN card_stats cs
+    ON t.card1 = cs.card1
+LEFT JOIN email_stats es
+    ON t.purchaser_email_domain = es.purchaser_email_domain
+    );
+  
+  
+[0m11:11:49.883803 [debug] [Thread-4 (]: SQL status: OK in 1.298 seconds
+[0m11:11:49.894803 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:49.896835 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+    SELECT index_name
+    FROM duckdb_indexes()
+    WHERE schema_name = 'main'
+      AND table_name = 'fraud_features'
+  
+[0m11:11:49.899808 [debug] [Thread-4 (]: SQL status: OK in 0.002 seconds
+[0m11:11:49.902803 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:49.904803 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+    SELECT COUNT(*) as remaining_indexes
+    FROM duckdb_indexes()
+    WHERE schema_name = 'main'
+      AND table_name = 'fraud_features'
+  
+[0m11:11:49.906814 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m11:11:49.908810 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:49.908810 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+alter table "fraud"."main"."fraud_features" rename to "fraud_features__dbt_backup"
+[0m11:11:49.908810 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m11:11:49.908810 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:49.925077 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+alter table "fraud"."main"."fraud_features__dbt_tmp" rename to "fraud_features"
+[0m11:11:49.927998 [debug] [Thread-4 (]: SQL status: OK in 0.001 seconds
+[0m11:11:49.936022 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: COMMIT
+[0m11:11:49.940212 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:49.940212 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: COMMIT
+[0m11:11:52.158874 [debug] [Thread-4 (]: SQL status: OK in 2.216 seconds
+[0m11:11:52.158874 [debug] [Thread-4 (]: Using duckdb connection "model.fraud_pipeline.fraud_features"
+[0m11:11:52.158874 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_features"} */
+
+      drop table if exists "fraud"."main"."fraud_features__dbt_backup" cascade
+    
+[0m11:11:52.174285 [debug] [Thread-4 (]: SQL status: OK in 0.007 seconds
+[0m11:11:52.175980 [debug] [Thread-4 (]: On model.fraud_pipeline.fraud_features: Close
+[0m11:11:52.177000 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C69DD7BB0>]}
+[0m11:11:52.178004 [info ] [Thread-4 (]: 3 of 4 OK created sql table model main.fraud_features .......................... [[32mOK[0m in 3.65s]
+[0m11:11:52.178983 [debug] [Thread-4 (]: Finished running node model.fraud_pipeline.fraud_features
+[0m11:11:52.180944 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.fraud_summary
+[0m11:11:52.181958 [info ] [Thread-1 (]: 4 of 4 START sql table model main.fraud_summary ................................ [RUN]
+[0m11:11:52.182951 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.stg_identity, now model.fraud_pipeline.fraud_summary)
+[0m11:11:52.183978 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.fraud_summary
+[0m11:11:52.187984 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.190638 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.fraud_summary
+[0m11:11:52.195680 [debug] [Thread-1 (]: Writing runtime sql for node "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.197685 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.198679 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: BEGIN
+[0m11:11:52.199682 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m11:11:52.200652 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m11:11:52.201652 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.202651 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+  
+    
+    
+
+    create  table
+      "fraud"."main"."fraud_summary__dbt_tmp"
+  
+    as (
+      -- fraud_summary: pre-aggregated stats for the Streamlit dashboard
+-- Refreshed by running: dbt run --select fraud_summary
+
+WITH base AS (
+    SELECT * FROM "fraud"."main"."fraud_features"
+)
+
+-- Daily summary
+SELECT
+    'daily'                             AS grain,
+    CAST(transaction_ts AS DATE)        AS dim_value,
+    COUNT(*)                            AS txn_count,
+    SUM(transaction_amt)                AS total_amt,
+    SUM(is_fraud)                       AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY CAST(transaction_ts AS DATE)
+
+UNION ALL
+
+-- By product
+SELECT
+    'product'       AS grain,
+    product_cd      AS dim_value,
+    COUNT(*)        AS txn_count,
+    SUM(transaction_amt) AS total_amt,
+    SUM(is_fraud)   AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY product_cd
+
+UNION ALL
+
+-- By card type
+SELECT
+    'card_type'     AS grain,
+    card6           AS dim_value,
+    COUNT(*)        AS txn_count,
+    SUM(transaction_amt) AS total_amt,
+    SUM(is_fraud)   AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+WHERE card6 IS NOT NULL
+GROUP BY card6
+
+UNION ALL
+
+-- By email domain (top 20 by volume)
+SELECT
+    'email_domain'          AS grain,
+    purchaser_email_domain  AS dim_value,
+    COUNT(*)                AS txn_count,
+    SUM(transaction_amt)    AS total_amt,
+    SUM(is_fraud)           AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+WHERE purchaser_email_domain IS NOT NULL
+GROUP BY purchaser_email_domain
+QUALIFY ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) <= 20
+
+UNION ALL
+
+-- By hour of day
+SELECT
+    'hour_of_day'                       AS grain,
+    CAST(hour_of_day AS VARCHAR)        AS dim_value,
+    COUNT(*)                            AS txn_count,
+    SUM(transaction_amt)                AS total_amt,
+    SUM(is_fraud)                       AS fraud_count,
+    AVG(CAST(is_fraud AS DOUBLE)) * 100 AS fraud_rate_pct,
+    SUM(CASE WHEN is_fraud = 1 THEN transaction_amt ELSE 0 END) AS fraud_amt
+FROM base
+GROUP BY hour_of_day
+    );
+  
+  
+[0m11:11:52.302306 [debug] [Thread-1 (]: SQL status: OK in 0.099 seconds
+[0m11:11:52.304308 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.305304 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+    SELECT index_name
+    FROM duckdb_indexes()
+    WHERE schema_name = 'main'
+      AND table_name = 'fraud_summary'
+  
+[0m11:11:52.307306 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m11:11:52.309306 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.310310 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+    SELECT COUNT(*) as remaining_indexes
+    FROM duckdb_indexes()
+    WHERE schema_name = 'main'
+      AND table_name = 'fraud_summary'
+  
+[0m11:11:52.312305 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m11:11:52.317484 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.318482 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+alter table "fraud"."main"."fraud_summary" rename to "fraud_summary__dbt_backup"
+[0m11:11:52.320522 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m11:11:52.327112 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.328120 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+alter table "fraud"."main"."fraud_summary__dbt_tmp" rename to "fraud_summary"
+[0m11:11:52.330079 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m11:11:52.331114 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: COMMIT
+[0m11:11:52.331114 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.331114 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: COMMIT
+[0m11:11:52.342579 [debug] [Thread-1 (]: SQL status: OK in 0.008 seconds
+[0m11:11:52.348467 [debug] [Thread-1 (]: Using duckdb connection "model.fraud_pipeline.fraud_summary"
+[0m11:11:52.351634 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "node_id": "model.fraud_pipeline.fraud_summary"} */
+
+      drop table if exists "fraud"."main"."fraud_summary__dbt_backup" cascade
+    
+[0m11:11:52.355651 [debug] [Thread-1 (]: SQL status: OK in 0.002 seconds
+[0m11:11:52.357664 [debug] [Thread-1 (]: On model.fraud_pipeline.fraud_summary: Close
+[0m11:11:52.358665 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '6f50724e-95f6-4175-842a-33df71866b21', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C69D9BE50>]}
+[0m11:11:52.359983 [info ] [Thread-1 (]: 4 of 4 OK created sql table model main.fraud_summary ........................... [[32mOK[0m in 0.18s]
+[0m11:11:52.361193 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.fraud_summary
+[0m11:11:52.363187 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:11:52.364196 [debug] [MainThread]: On master: BEGIN
+[0m11:11:52.365198 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m11:11:52.366196 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m11:11:52.367375 [debug] [MainThread]: On master: COMMIT
+[0m11:11:52.368558 [debug] [MainThread]: Using duckdb connection "master"
+[0m11:11:52.369559 [debug] [MainThread]: On master: COMMIT
+[0m11:11:52.370559 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m11:11:52.371591 [debug] [MainThread]: On master: Close
+[0m11:11:52.372588 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m11:11:52.373232 [debug] [MainThread]: Connection 'create_fraud_main' was properly closed.
+[0m11:11:52.373232 [debug] [MainThread]: Connection 'list_fraud_main' was properly closed.
+[0m11:11:52.374778 [debug] [MainThread]: Connection 'model.fraud_pipeline.fraud_summary' was properly closed.
+[0m11:11:52.374778 [debug] [MainThread]: Connection 'model.fraud_pipeline.stg_transactions' was properly closed.
+[0m11:11:52.374778 [debug] [MainThread]: Connection 'model.fraud_pipeline.fraud_features' was properly closed.
+[0m11:11:52.374778 [info ] [MainThread]: 
+[0m11:11:52.374778 [info ] [MainThread]: Finished running 2 table models, 2 view models in 0 hours 0 minutes and 4.43 seconds (4.43s).
+[0m11:11:52.374778 [debug] [MainThread]: Command end result
+[0m11:11:52.424542 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m11:11:52.424542 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m11:11:52.436748 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\run_results.json
+[0m11:11:52.436748 [info ] [MainThread]: 
+[0m11:11:52.436748 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m11:11:52.436748 [info ] [MainThread]: 
+[0m11:11:52.436748 [info ] [MainThread]: Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=4
+[0m11:11:52.436748 [debug] [MainThread]: Command `dbt run` succeeded at 11:11:52.436748 after 6.67 seconds
+[0m11:11:52.450818 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C65F5F010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C6630E4A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C631AB970>]}
+[0m11:11:52.451863 [debug] [MainThread]: Flushing usage events
+[0m11:11:53.382355 [debug] [MainThread]: An error was encountered while trying to flush usage events
