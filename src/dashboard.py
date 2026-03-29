@@ -31,18 +31,131 @@ st.set_page_config(
     initial_sidebar_state='expanded',
 )
 
+# ─── Demo Banner ─────────────────────────────────────────────────────────────
+if not DB_PATH.exists():
+    st.info(
+        "**Demo Mode** — showing sample data. "
+        "The full pipeline processes 590,540 real transactions with AUC 0.9791. "
+        "[View the code on GitHub](https://github.com/Kshitijbhatt1998/fintech-fraud-pipeline)",
+        icon="ℹ️"
+    )
+
+# ─── Demo Mode Detection & Generators ─────────────────────────────────────────
+DEMO_MODE = not DB_PATH.exists()
+
+def get_demo_summary():
+    """Realistic demo data matching actual pipeline results."""
+    import numpy as np
+    np.random.seed(42)
+    
+    # Generate 'daily' summary
+    dates = pd.date_range('2017-12-01', periods=180, freq='D')
+    daily_txns = np.random.randint(2800, 6200, 180)
+    daily_fraud_rate = np.random.uniform(0.025, 0.065, 180)
+    
+    daily = pd.DataFrame({
+        'grain': 'daily',
+        'dim_value': dates.strftime('%Y-%m-%d'),
+        'txn_count': daily_txns,
+        'fraud_count': (daily_txns * daily_fraud_rate).astype(int),
+        'fraud_rate_pct': daily_fraud_rate * 100,
+        'total_amt': daily_txns * np.random.uniform(80, 140, 180),
+        'fraud_amt': daily_txns * daily_fraud_rate * np.random.uniform(90, 160, 180),
+    })
+    
+    # Generate 'product' summary
+    products = ['W', 'H', 'C', 'S', 'R']
+    prod_txns = [280000, 120000, 80000, 50000, 30000]
+    prod_rates = [2.5, 3.8, 10.5, 4.2, 5.0]
+    product = pd.DataFrame({
+        'grain': 'product',
+        'dim_value': products,
+        'txn_count': prod_txns,
+        'fraud_count': [int(t * r / 100) for t, r in zip(prod_txns, prod_rates)],
+        'fraud_rate_pct': prod_rates,
+        'total_amt': [t * 100 for t in prod_txns],
+        'fraud_amt': [int(t * r / 100 * 110) for t, r in zip(prod_txns, prod_rates)],
+    })
+    
+    # Generate 'card_type' summary
+    cards = ['debit', 'credit', 'charge card']
+    card_rates = [2.5, 6.5, 1.2]
+    card = pd.DataFrame({
+        'grain': 'card_type',
+        'dim_value': cards,
+        'txn_count': [350000, 180000, 20000],
+        'fraud_rate_pct': card_rates,
+        'fraud_count': [1, 1, 1], # dummy
+        'total_amt': [1, 1, 1], # dummy
+        'fraud_amt': [1, 1, 1], # dummy
+    })
+    
+    # Generate 'email_domain' summary
+    emails = ['gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'anonymous.com']
+    email = pd.DataFrame({
+        'grain': 'email_domain',
+        'dim_value': emails,
+        'fraud_rate_pct': [2.8, 9.5, 12.2, 3.5, 5.1],
+        'txn_count': [200000, 50000, 40000, 30000, 20000],
+        'fraud_count': [1, 1, 1, 1, 1], # dummy
+        'total_amt': [1, 1, 1, 1, 1], # dummy
+        'fraud_amt': [1, 1, 1, 1, 1], # dummy
+    })
+
+    # Generate 'hour_of_day' summary
+    hours = list(range(24))
+    hour = pd.DataFrame({
+        'grain': 'hour_of_day',
+        'dim_value': [str(h) for h in hours],
+        'fraud_rate_pct': [3 + np.sin(h/24 * 2 * np.pi) + np.random.normal(0, 0.5) for h in hours],
+        'txn_count': [5000 for _ in hours],
+        'fraud_count': [1 for _ in hours], # dummy
+        'total_amt': [1 for _ in hours], # dummy
+        'fraud_amt': [1 for _ in hours], # dummy
+    })
+
+    return pd.concat([daily, product, card, email, hour], ignore_index=True)
+
+def get_demo_sample():
+    """Demo transaction records."""
+    import numpy as np
+    np.random.seed(123)
+    n = 5000
+    return pd.DataFrame({
+        'transaction_id': range(1000000, 1000000 + n),
+        'transaction_ts': pd.date_range('2017-12-01', periods=n, freq='30min'),
+        'transaction_amt': np.random.lognormal(4.5, 1.2, n).round(2),
+        'product_cd': np.random.choice(['W', 'H', 'C', 'S', 'R'], n,
+                      p=[0.45, 0.25, 0.15, 0.10, 0.05]),
+        'card4': np.random.choice(['visa', 'mastercard', 'american express', 'discover'],
+                  n, p=[0.55, 0.30, 0.10, 0.05]),
+        'card6': np.random.choice(['debit', 'credit', 'charge card'], n,
+                  p=[0.60, 0.35, 0.05]),
+        'purchaser_email_domain': np.random.choice(
+            ['gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'icloud.com',
+             'anonymous.com', 'msn.com', 'aol.com'], n),
+        'is_fraud': np.random.choice([0, 1], n, p=[0.965, 0.035]),
+        'hour_of_day': np.random.randint(0, 24, n),
+        'day_of_week': np.random.randint(0, 7, n),
+        'has_identity': np.random.choice([0, 1], n, p=[0.75, 0.25]),
+        'transaction_dt': pd.date_range('2017-12-01', periods=n, freq='30min').date
+    })
+
 # ─── Data Loading ─────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300)
 def load_summary():
+    if DEMO_MODE:
+        return get_demo_summary()
     con = duckdb.connect(str(DB_PATH), read_only=True)
     df = con.execute('SELECT * FROM fraud_summary').df()
     con.close()
     return df
 
-
 @st.cache_data(ttl=300)
 def load_sample(n=50_000):
     """Load a sample of fraud_features for transaction explorer."""
+    if DEMO_MODE:
+        return get_demo_sample()
     con = duckdb.connect(str(DB_PATH), read_only=True)
     df = con.execute(f"""
         SELECT
@@ -56,10 +169,13 @@ def load_sample(n=50_000):
     con.close()
     return df
 
-
 @st.cache_data(ttl=600)
 def load_model_data():
     """Load model + holdout predictions for performance tab."""
+    if DEMO_MODE:
+        # For demo, we don't return model data to trigger the warning which is fine
+        # Or we could return a mock model. Keeping it simple as per original logic.
+        return None
     if not MODEL_PATH.exists():
         return None
     with open(MODEL_PATH, 'rb') as f:
