@@ -1,127 +1,136 @@
-# 🛡️ Fintech Fraud Detection Pipeline
+# Fintech Fraud Detection Pipeline
 
-A robust, end-to-end data engineering and machine learning pipeline for detecting fraudulent transactions in fintech workflows. This project leverages modern data tools like **DuckDB**, **dbt**, and **MLflow** to create a scalable and trackable fraud detection system.
+**A production-grade data pipeline for fintech AI teams — from raw transaction logs to clean, labeled, model-ready datasets. Built for your model, maintained monthly.**
 
----
-
-## 🚀 Overview
-
-The **Fintech Fraud Pipeline** is designed to process high-velocity transaction data, perform complex feature engineering, and deploy predictive models to identify fraudulent patterns. Built with performance and observability in mind, it provides a seamless flow from raw data ingestion to a real-time monitoring dashboard.
-
-### ✨ Key Features
-- **⚡ High-Performance Storage**: Uses [DuckDB](https://duckdb.org/) for lightning-fast local analytical processing.
-- **🏗️ Structured Transformations**: Leverages [dbt](https://www.getdbt.com/) (Data Build Tool) for modular, version-controlled SQL transformations.
-- **🧠 Advanced ML**: Employs [XGBoost](https://xgboost.readthedocs.io/) for high-accuracy fraud prediction.
-- **📊 Experiment Tracking**: Integrated with [MLflow](https://mlflow.org/) to track model metrics and parameters.
-- **📈 Live Dashboard**: A Streamlit-based interactive dashboard to visualize fraud alerts and model performance.
+[![Python](https://img.shields.io/badge/Python-3.10-blue)](https://python.org)
+[![dbt](https://img.shields.io/badge/dbt-1.x-orange)](https://getdbt.com)
+[![DuckDB](https://img.shields.io/badge/DuckDB-0.10-yellow)](https://duckdb.org)
+[![XGBoost AUC](https://img.shields.io/badge/XGBoost%20AUC-0.9791-brightgreen)](./models/)
+[![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-red)](./src/dashboard.py)
 
 ---
 
-## 📐 Architecture
+## What This Demonstrates
 
-```mermaid
-graph LR
-    A[Kaggle Dataset] -->|Ingest| B[(DuckDB Raw)]
-    B -->|dbt| C[(DuckDB Clean/Models)]
-    C -->|Train| D[XGBoost Model]
-    D -->|Track| E[MLflow]
-    C -->|Analyze| F[Streamlit Dashboard]
-    D -->|Predict| F
+This pipeline ingests, cleans, transforms, and delivers **590,540 real financial transactions** as a model-ready feature dataset — the same kind of pipeline I build for fintech AI teams as a custom service.
+
+**If you're building a fraud detection, credit scoring, or AML model and need clean, structured training data — this is the type of pipeline I deliver.**
+
+→ [Book a discovery call](https://calendly.com) | [Connect on LinkedIn](https://linkedin.com/in/kshitijbhatt)
+
+---
+
+## Pipeline Results
+
+| Metric | Value |
+|--------|-------|
+| Raw transactions ingested | 590,540 |
+| Identity records joined | 144,233 |
+| Features engineered | 58 |
+| Model (XGBoost) CV AUC | **0.9791** |
+| Model Holdout AUC | **0.9791** |
+| Fraud rate in dataset | ~3.5% |
+| Pipeline runtime (full) | < 4 minutes |
+
+---
+
+## Architecture
+
+```
+Raw CSVs (Kaggle IEEE-CIS)
+        │
+        ▼
+[1. Ingest]  src/ingest_data.py
+        DuckDB ← read_csv_auto
+        - raw_transactions (590,540 rows)
+        - raw_identity (144,233 rows)
+        - Drop >90% null columns
+        - Engineer: transaction_ts, hour_of_day, log_amt, M-flag encoding
+        │
+        ▼
+[2. Transform]  dbt (dbt_project/)
+        staging/
+          stg_transactions  ← clean_transactions (view)
+          stg_identity      ← clean_identity (view)
+        marts/
+          fraud_features    ← joined + velocity features (table)
+          fraud_summary     ← aggregated risk by product/card/email (table)
+        │
+        ▼
+[3. Train]  src/train.py
+        XGBoost + TimeSeriesSplit (5-fold)
+        MLflow experiment tracking
+        → models/xgb_fraud_v1.pkl
+        │
+        ▼
+[4. Serve]  src/dashboard.py
+        Streamlit: Overview / Risk Breakdown / Model Performance / Transaction Explorer
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Engineered Features
 
-| Category | Tools |
-| :------- | :---- |
-| **Database** | DuckDB |
-| **Transform** | dbt-duckdb |
-| **ML/AI** | XGBoost, Scikit-learn |
-| **Tracking** | MLflow |
-| **UI/UX** | Streamlit, Plotly |
-| **Language** | Python 3.x |
+Beyond raw columns, this pipeline adds:
 
----
-
-## 📁 Project Structure
-
-```text
-├── data/               # Raw and processed datasets (DuckDB)
-├── dbt_project/        # dbt models and configurations
-├── models/             # Saved ML model artifacts
-├── mlruns/             # MLflow experiment logs
-├── notebooks/          # Exploratory Data Analysis (EDA)
-├── src/
-│   ├── ingest_data.py  # Raw data ingestion & initial cleaning
-│   ├── train.py        # ML training & evaluation
-│   └── dashboard.py    # Streamlit visualization app
-└── requirements.txt    # Project dependencies
-```
+| Feature | Logic |
+|---------|-------|
+| `card1_txn_count` | Transaction velocity per card |
+| `card1_avg_amt` | Historical average transaction amount per card |
+| `card1_historical_fraud_rate` | Card-level prior fraud rate |
+| `email_txn_count` | Transaction count per email domain |
+| `email_historical_fraud_rate` | Domain-level prior fraud rate |
+| `is_high_risk_product` | Binary flag for product code W |
+| `amt_vs_card_avg_ratio` | Amount relative to card's historical average |
+| `log_amt` | Log-transformed transaction amount |
+| `hour_of_day` / `day_of_week` | Temporal features from raw timestamp |
+| `has_identity` | Whether a device/browser identity record exists |
 
 ---
 
-## 🏁 Getting Started
+## Tech Stack
 
-### 1. Prerequisites
-- Python 3.8+
-- [Kaggle API Credentials](https://github.com/Kaggle/kaggle-api)
+| Layer | Tool |
+|-------|------|
+| Storage | DuckDB |
+| Transformation | dbt (staging → marts, Medallion pattern) |
+| ML | XGBoost, scikit-learn |
+| Experiment tracking | MLflow |
+| Dashboard | Streamlit + Plotly |
+| Language | Python 3.10 |
 
-### 2. Installation
+---
+
+## Quickstart
+
 ```bash
-# Clone the repository
+# 1. Clone and install
 git clone https://github.com/Kshitijbhatt1998/fintech-fraud-pipeline.git
 cd fintech-fraud-pipeline
-
-# Create and activate virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
-```
 
-### 3. Data Setup
-Download the [IEEE-CIS Fraud Detection](https://www.kaggle.com/c/ieee-fraud-detection) dataset and place the CSVs in `data/raw/`.
+# 2. Download data
+# Place Kaggle IEEE-CIS files into data/raw/
+# https://www.kaggle.com/c/ieee-fraud-detection/data
 
----
-
-## ⚙️ Usage
-
-### 📥 Ingestion & Cleaning
-Load raw transactions into DuckDB and perform initial preprocessing:
-```bash
+# 3. Ingest
 python src/ingest_data.py
-```
 
-### 🏗️ Data Transformation (dbt)
-Run dbt models to prepare features for training:
-```bash
-# Update dbt profiles.yml if necessary
-cd dbt_project
-dbt build
-```
+# 4. Transform (dbt)
+cd dbt_project && dbt run && dbt test && cd ..
 
-### 🏋️ Model Training
-Train the XGBoost model and log results to MLflow:
-```bash
+# 5. Train model
 python src/train.py
-```
 
-### 📊 Monitoring Dashboard
-Launch the interactive fraud dashboard:
-```bash
+# 6. Launch dashboard
 streamlit run src/dashboard.py
 ```
 
 ---
 
-## 👤 Author
-**Kshitij Bhatt**  
-[LinkedIn](https://www.linkedin.com/in/kshitij-bhatt-a5502517b)
+## Data Source
 
----
-## 📝 License
-Distributed under the MIT License.
+IEEE-CIS Fraud Detection dataset (Kaggle, 2019). Publicly available for research and ML development.  
+Transaction data represents real e-commerce payment events with anonymized features.
 
 
