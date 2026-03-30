@@ -7,7 +7,7 @@
 [![DuckDB](https://img.shields.io/badge/DuckDB-0.10-yellow)](https://duckdb.org)
 [![XGBoost AUC](https://img.shields.io/badge/XGBoost%20AUC-0.9791-brightgreen)](./models/)
 [![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-red)](./src/dashboard.py)
-
+[![Huggingface]([(https://huggingface.co/datasets/Kshitijbhatt1998/ieee-fraud-detection-pipeline-features)](./src/dashboard.py)
 ---
 
 ## What This Demonstrates
