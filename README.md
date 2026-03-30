@@ -133,14 +133,4 @@ streamlit run src/dashboard.py
 IEEE-CIS Fraud Detection dataset (Kaggle, 2019). Publicly available for research and ML development.  
 Transaction data represents real e-commerce payment events with anonymized features.
 
----
 
-## About
-
-Built by **Kshitij Bhatt** — Data Engineer and pipeline architect specializing in fintech AI infrastructure.
-
-I build custom data pipelines for AI teams that need clean, labeled, model-ready datasets from messy financial data sources. This project is a public proof-of-work case study.
-
-**Services:** Custom data ingestion pipelines · Feature engineering · dbt transformations · ML-ready dataset delivery · Monthly retainer maintenance
-
-→ [GitHub](https://github.com/Kshitijbhatt1998) | [LinkedIn](https://linkedin.com/in/kshitijbhatt)
