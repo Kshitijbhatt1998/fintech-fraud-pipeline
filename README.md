@@ -8,7 +8,6 @@
 [![XGBoost AUC](https://img.shields.io/badge/XGBoost%20AUC-0.9791-brightgreen)](./models/)
 [![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-red)](./src/dashboard.py)
 [![Hugging Face](https://img.shields.io/badge/-Hugging%20Face%20Datasets-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/datasets/Kshitijbhatt1998/ieee-fraud-detection-pipeline-features)
-
 ---
 
 ## What This Demonstrates
