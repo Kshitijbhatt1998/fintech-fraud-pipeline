@@ -7,6 +7,52 @@ This pipeline transforms raw financial transaction logs into a clean, labeled, m
 
 ---
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    A["📁 Raw CSVs\ntrain_transaction.csv\ntrain_identity.csv"] --> B["🔧 Ingest\nsrc/ingest_data.py"]
+
+    subgraph bronze ["🥉 Bronze (DuckDB)"]
+        B1["raw_transactions\n590,540 rows"]
+        B2["raw_identity\n144,233 rows"]
+    end
+
+    B --> B1
+    B --> B2
+
+    subgraph clean ["🧹 Cleaning"]
+        C1["clean_transactions\nDrop nulls · Parse timestamps\nEncode flags · log_amt"]
+        C2["clean_identity\npass-through"]
+    end
+
+    B1 --> C1
+    B2 --> C2
+
+    subgraph silver ["🥈 Silver (dbt views)"]
+        D1["stg_transactions"]
+        D2["stg_identity"]
+    end
+
+    C1 --> D1
+    C2 --> D2
+
+    subgraph gold ["🥇 Gold (dbt tables)"]
+        E1["fraud_features\n58 features + label"]
+        E2["fraud_summary\nagg by segment"]
+    end
+
+    D1 --> E1
+    D2 --> E1
+    D1 --> E2
+
+    E1 --> F["🤖 XGBoost\nAUC 0.9791"]
+    E2 --> G["📊 Streamlit\nDashboard"]
+    E1 --> H["📦 Parquet\nHuggingFace"]
+```
+
+---
+
 ## Pipeline Stages
 
 ### Stage 1 — Ingestion (`src/ingest_data.py`)
@@ -96,6 +142,19 @@ amt_vs_card_avg_ratio    -- current amount / card's historical average
 is_high_risk_product     -- 1 if product_cd = 'W' (highest fraud rate segment)
 has_identity             -- 1 if device fingerprint record exists
 ```
+
+---
+
+> **⚠️ Production Note — Point-in-Time Correctness**
+>
+> The `card1_historical_fraud_rate` and `email_historical_fraud_rate` features are computed across the **entire dataset** in a single aggregation. In a batch proof-of-work context this is acceptable and produces valid model performance metrics.
+>
+> In a **production streaming pipeline**, these aggregations must be computed using only data available *at the time of each transaction* — i.e., a windowed or point-in-time join — to avoid temporal data leakage. Implementation approaches include:
+> - **DuckDB window functions**: `AVG(is_fraud) OVER (PARTITION BY card1 ORDER BY transaction_dt ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING)`
+> - **Feature store**: Pre-materialise rolling aggregates keyed by entity + timestamp
+> - **Incremental dbt model**: Recompute stats only on new data batches
+>
+> This distinction is documented here for teams adapting this pipeline for real-time fraud scoring.
 
 ---
 

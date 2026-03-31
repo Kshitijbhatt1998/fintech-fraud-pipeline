@@ -1,0 +1,51 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  python-lint:
+    name: Python (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install ruff
+        run: pip install ruff==0.4.4
+
+      - name: Check formatting
+        run: ruff format --check src/
+
+      - name: Check linting
+        run: ruff check src/
+
+  sql-lint:
+    name: SQL (sqlfluff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install sqlfluff
+        run: pip install sqlfluff==3.0.7 sqlfluff-templater-dbt==3.0.7 dbt-duckdb>=1.7.0
+
+      - name: Lint dbt SQL models
+        working-directory: dbt_project
+        run: |
+          sqlfluff lint models/ \
+            --dialect duckdb \
+            --templater dbt \
+            --rules L003,L004,L010,L014,L019,L036,L042 \
+            --exclude-rules L031

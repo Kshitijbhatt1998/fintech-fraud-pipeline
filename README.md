@@ -7,7 +7,7 @@
 [![DuckDB](https://img.shields.io/badge/DuckDB-0.10-yellow)](https://duckdb.org)
 [![XGBoost AUC](https://img.shields.io/badge/XGBoost%20AUC-0.9791-brightgreen)](./models/)
 [![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-red)](./src/dashboard.py)
-[![Huggingface](https://huggingface.co/datasets/Kshitijbhatt1998/ieee-fraud-detection-pipeline-features)](./src/dashboard.py)
+[![Hugging Face](https://img.shields.io/badge/-Hugging%20Face%20Datasets-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/datasets/Kshitijbhatt1998/ieee-fraud-detection-pipeline-features)
 ---
 
 ## What This Demonstrates
@@ -23,7 +23,7 @@ This pipeline ingests, cleans, transforms, and delivers **590,540 real financial
 ## Pipeline Results
 
 | Metric | Value |
-|--------|-------|
+| --- | --- |
 | Raw transactions ingested | 590,540 |
 | Identity records joined | 144,233 |
 | Features engineered | 58 |
@@ -74,7 +74,7 @@ Raw CSVs (Kaggle IEEE-CIS)
 Beyond raw columns, this pipeline adds:
 
 | Feature | Logic |
-|---------|-------|
+| --- | --- |
 | `card1_txn_count` | Transaction velocity per card |
 | `card1_avg_amt` | Historical average transaction amount per card |
 | `card1_historical_fraud_rate` | Card-level prior fraud rate |
@@ -88,10 +88,25 @@ Beyond raw columns, this pipeline adds:
 
 ---
 
+## Dashboard Preview
+
+> **[Add GIF here]** — Record with [ScreenToGif](https://www.screentogif.com/) (Windows) or `brew install --cask licecap` (macOS). Aim for 30 seconds covering Risk Breakdown → Model Performance tabs.
+
+<!--
+To add your GIF:
+1. Record dashboard with ScreenToGif or LICEcap
+2. Save as `docs/dashboard-preview.gif`
+3. Replace the line below with: ![Dashboard Preview](./docs/dashboard-preview.gif)
+-->
+
+![Dashboard Preview](./docs/dashboard-preview.gif)
+
+---
+
 ## Tech Stack
 
 | Layer | Tool |
-|-------|------|
+| --- | --- |
 | Storage | DuckDB |
 | Transformation | dbt (staging → marts, Medallion pattern) |
 | ML | XGBoost, scikit-learn |
@@ -133,4 +148,57 @@ streamlit run src/dashboard.py
 IEEE-CIS Fraud Detection dataset (Kaggle, 2019). Publicly available for research and ML development.  
 Transaction data represents real e-commerce payment events with anonymized features.
 
+---
 
+## Troubleshooting
+
+### `FileNotFoundError: data/raw/train_transaction.csv`
+
+The Kaggle data files are not committed to the repo. Download them from the [IEEE-CIS Fraud Detection competition](https://www.kaggle.com/c/ieee-fraud-detection/data) and place in `data/raw/`.
+
+### `duckdb.CatalogException: Table 'fraud_features' does not exist`
+
+You ran `python src/train.py` before running dbt. The correct order is:
+
+```bash
+python src/ingest_data.py   # first
+cd dbt_project && dbt run   # second
+python src/train.py         # third
+```
+
+### `MemoryError` during training
+
+The pipeline requires approximately **4GB RAM** for the 590K row dataset. Close other applications and retry. On machines with <4GB RAM, reduce the dataset by modifying the `LIMIT` clause in `load_features()` in `src/train.py`.
+
+### dbt profile error: `Could not find profile named 'fraud_pipeline'`
+
+Ensure `dbt_project/profiles.yml` exists and contains:
+
+```yaml
+fraud_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/fraud.duckdb'
+```
+
+### Dashboard shows blank Model Performance tab
+
+Run `python src/train.py` first to generate `models/xgb_fraud_v1.pkl`. The tab requires a trained model file.
+
+### HuggingFace Dataset Viewer timeout
+
+This is a known HuggingFace infrastructure issue with larger Parquet files. The dataset is still fully downloadable. Add a `configs:` block to the dataset card YAML to help the viewer locate the split — see [HUGGINGFACE_CARD.md](./HUGGINGFACE_CARD.md).
+
+---
+
+## About
+
+Built by **Kshitij Bhatt** — Data Engineer and pipeline architect specializing in fintech AI infrastructure.
+
+I build custom data pipelines for AI teams that need clean, labeled, model-ready datasets from messy financial data sources. This project is a public proof-of-work case study.
+
+**Services:** Custom data ingestion pipelines · Feature engineering · dbt transformations · ML-ready dataset delivery · Monthly retainer maintenance
+
+→ [GitHub](https://github.com/Kshitijbhatt1998) | [LinkedIn](https://linkedin.com/in/kshitijbhatt)

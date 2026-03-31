@@ -5103,3 +5103,214 @@ alter table "fraud"."main"."fraud_summary__dbt_tmp" rename to "fraud_summary"
 [0m11:11:52.450818 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C65F5F010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C6630E4A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024C631AB970>]}
 [0m11:11:52.451863 [debug] [MainThread]: Flushing usage events
 [0m11:11:53.382355 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m08:10:59.566292 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525BF5F0D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525D1EBBE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525D1EBA00>]}
+
+
+============================== 08:10:59.572760 | 44df4c00-e7a8-43db-9dbf-3b934881065d ==============================
+[0m08:10:59.572760 [info ] [MainThread]: Running with dbt=1.11.7
+[0m08:10:59.573945 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'invocation_command': 'dbt compile --profiles-dir .', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'D:\\Project ideas\\fintech-fraud-pipeline\\fintech-fraud-pipeline\\dbt_project\\logs'}
+[0m08:11:03.200403 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525C2AC520>]}
+[0m08:11:03.279670 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525E25E6B0>]}
+[0m08:11:03.286557 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m08:11:03.775852 [debug] [MainThread]: checksum: b80718358155fc17c3559352095564dd56ada1cc1a1c0ef2e62c857e71583775, vars: {}, profile: , target: , version: 1.11.7
+[0m08:11:04.174122 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 6 files changed.
+[0m08:11:04.174122 [debug] [MainThread]: Partial parsing: updated file: fraud_pipeline://tests\schema.yml
+[0m08:11:04.174122 [debug] [MainThread]: Partial parsing: updated file: fraud_pipeline://models\staging\sources.yml
+[0m08:11:04.174122 [debug] [MainThread]: Partial parsing: updated file: fraud_pipeline://models\marts\fraud_features.sql
+[0m08:11:04.174122 [debug] [MainThread]: Partial parsing: updated file: fraud_pipeline://models\marts\fraud_summary.sql
+[0m08:11:04.174122 [debug] [MainThread]: Partial parsing: updated file: fraud_pipeline://models\staging\stg_transactions.sql
+[0m08:11:04.179708 [debug] [MainThread]: Partial parsing: updated file: fraud_pipeline://models\staging\stg_identity.sql
+[0m08:11:04.815274 [warn ] [MainThread]: [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `accepted_values` defined on 'fraud_summary'
+in package 'fraud_pipeline' (tests\schema.yml). Arguments to generic tests
+should be nested under the `arguments` property.
+[0m08:11:04.815274 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525EB76500>]}
+[0m08:11:04.997037 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525EC2BFA0>]}
+[0m08:11:05.139279 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m08:11:05.154040 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m08:11:05.306395 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525E854970>]}
+[0m08:11:05.314497 [info ] [MainThread]: Found 18 data tests, 4 models, 2 sources, 474 macros
+[0m08:11:05.316148 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525EC863B0>]}
+[0m08:11:05.318162 [info ] [MainThread]: 
+[0m08:11:05.318162 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m08:11:05.320179 [info ] [MainThread]: 
+[0m08:11:05.321194 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m08:11:05.329648 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_fraud_main'
+[0m08:11:05.720304 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m08:11:05.720304 [debug] [ThreadPool]: On list_fraud_main: BEGIN
+[0m08:11:05.722968 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m08:11:05.783288 [debug] [ThreadPool]: SQL status: OK in 0.061 seconds
+[0m08:11:05.783288 [debug] [ThreadPool]: Using duckdb connection "list_fraud_main"
+[0m08:11:05.783288 [debug] [ThreadPool]: On list_fraud_main: /* {"app": "dbt", "dbt_version": "1.11.7", "profile_name": "fraud_pipeline", "target_name": "dev", "connection_name": "list_fraud_main"} */
+select
+      'fraud' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'fraud'
+  
+[0m08:11:05.845704 [debug] [ThreadPool]: SQL status: OK in 0.061 seconds
+[0m08:11:05.852042 [debug] [ThreadPool]: On list_fraud_main: ROLLBACK
+[0m08:11:05.856149 [debug] [ThreadPool]: Failed to rollback 'list_fraud_main'
+[0m08:11:05.856149 [debug] [ThreadPool]: On list_fraud_main: Close
+[0m08:11:05.856149 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '44df4c00-e7a8-43db-9dbf-3b934881065d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525E855150>]}
+[0m08:11:05.872672 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.stg_identity
+[0m08:11:05.876339 [debug] [Thread-2 (]: Began running node model.fraud_pipeline.stg_transactions
+[0m08:11:05.876339 [debug] [Thread-3 (]: Began running node test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe
+[0m08:11:05.876339 [debug] [Thread-4 (]: Began running node test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228
+[0m08:11:05.876339 [debug] [Thread-1 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_identity'
+[0m08:11:05.876339 [debug] [Thread-2 (]: Acquiring new duckdb connection 'model.fraud_pipeline.stg_transactions'
+[0m08:11:05.876339 [debug] [Thread-3 (]: Acquiring new duckdb connection 'test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe'
+[0m08:11:05.879678 [debug] [Thread-4 (]: Acquiring new duckdb connection 'test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228'
+[0m08:11:05.879678 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.stg_identity
+[0m08:11:05.879678 [debug] [Thread-2 (]: Began compiling node model.fraud_pipeline.stg_transactions
+[0m08:11:05.881726 [debug] [Thread-3 (]: Began compiling node test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe
+[0m08:11:05.882732 [debug] [Thread-4 (]: Began compiling node test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228
+[0m08:11:05.890698 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.stg_identity"
+[0m08:11:05.893896 [debug] [Thread-2 (]: Writing injected SQL for node "model.fraud_pipeline.stg_transactions"
+[0m08:11:05.895075 [debug] [Thread-3 (]: Writing injected SQL for node "test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe"
+[0m08:11:05.906514 [debug] [Thread-4 (]: Writing injected SQL for node "test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228"
+[0m08:11:05.907738 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.stg_identity
+[0m08:11:05.907738 [debug] [Thread-2 (]: Began executing node model.fraud_pipeline.stg_transactions
+[0m08:11:05.907738 [debug] [Thread-3 (]: Began executing node test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe
+[0m08:11:05.907738 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.stg_identity
+[0m08:11:05.907738 [debug] [Thread-4 (]: Began executing node test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228
+[0m08:11:05.907738 [debug] [Thread-2 (]: Finished running node model.fraud_pipeline.stg_transactions
+[0m08:11:05.907738 [debug] [Thread-3 (]: Finished running node test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe
+[0m08:11:05.913656 [debug] [Thread-1 (]: Began running node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da
+[0m08:11:05.914626 [debug] [Thread-4 (]: Finished running node test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228
+[0m08:11:05.914626 [debug] [Thread-2 (]: Began running node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f
+[0m08:11:05.914626 [debug] [Thread-3 (]: Began running node test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db
+[0m08:11:05.914626 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.stg_identity, now test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da)
+[0m08:11:05.918015 [debug] [Thread-4 (]: Began running node test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462
+[0m08:11:05.918015 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.stg_transactions, now test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f)
+[0m08:11:05.918015 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.source_accepted_values_fraud_db_clean_transactions_isFraud__0__1.7360bd8ebe, now test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db)
+[0m08:11:05.918015 [debug] [Thread-1 (]: Began compiling node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da
+[0m08:11:05.921390 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.source_not_null_fraud_db_clean_identity_TransactionID.dd96a19228, now test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462)
+[0m08:11:05.923971 [debug] [Thread-2 (]: Began compiling node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f
+[0m08:11:05.924948 [debug] [Thread-3 (]: Began compiling node test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db
+[0m08:11:05.928924 [debug] [Thread-1 (]: Writing injected SQL for node "test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da"
+[0m08:11:05.929929 [debug] [Thread-4 (]: Began compiling node test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462
+[0m08:11:05.933507 [debug] [Thread-2 (]: Writing injected SQL for node "test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f"
+[0m08:11:05.940351 [debug] [Thread-3 (]: Writing injected SQL for node "test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db"
+[0m08:11:05.945631 [debug] [Thread-4 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462"
+[0m08:11:05.946666 [debug] [Thread-1 (]: Began executing node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da
+[0m08:11:05.947633 [debug] [Thread-2 (]: Began executing node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f
+[0m08:11:05.948352 [debug] [Thread-3 (]: Began executing node test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db
+[0m08:11:05.948982 [debug] [Thread-1 (]: Finished running node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da
+[0m08:11:05.948982 [debug] [Thread-4 (]: Began executing node test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462
+[0m08:11:05.950495 [debug] [Thread-2 (]: Finished running node test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f
+[0m08:11:05.951534 [debug] [Thread-3 (]: Finished running node test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db
+[0m08:11:05.952537 [debug] [Thread-1 (]: Began running node model.fraud_pipeline.fraud_features
+[0m08:11:05.953535 [debug] [Thread-4 (]: Finished running node test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462
+[0m08:11:05.954525 [debug] [Thread-2 (]: Began running node model.fraud_pipeline.fraud_summary
+[0m08:11:05.955319 [debug] [Thread-3 (]: Began running node test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6
+[0m08:11:05.955918 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_TransactionID.4b5056b1da, now model.fraud_pipeline.fraud_features)
+[0m08:11:05.956467 [debug] [Thread-4 (]: Began running node test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865
+[0m08:11:05.956467 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.source_not_null_fraud_db_clean_transactions_isFraud.912252912f, now model.fraud_pipeline.fraud_summary)
+[0m08:11:05.956467 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.source_unique_fraud_db_clean_transactions_TransactionID.f99e5797db, now test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6)
+[0m08:11:05.956467 [debug] [Thread-1 (]: Began compiling node model.fraud_pipeline.fraud_features
+[0m08:11:05.956467 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.not_null_stg_identity_transaction_id.0e6b6a0462, now test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865)
+[0m08:11:05.956467 [debug] [Thread-2 (]: Began compiling node model.fraud_pipeline.fraud_summary
+[0m08:11:05.956467 [debug] [Thread-3 (]: Began compiling node test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6
+[0m08:11:05.964330 [debug] [Thread-1 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_features"
+[0m08:11:05.964330 [debug] [Thread-4 (]: Began compiling node test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865
+[0m08:11:05.972675 [debug] [Thread-2 (]: Writing injected SQL for node "model.fraud_pipeline.fraud_summary"
+[0m08:11:05.976773 [debug] [Thread-3 (]: Writing injected SQL for node "test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6"
+[0m08:11:05.981751 [debug] [Thread-4 (]: Writing injected SQL for node "test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865"
+[0m08:11:05.983757 [debug] [Thread-1 (]: Began executing node model.fraud_pipeline.fraud_features
+[0m08:11:05.983757 [debug] [Thread-2 (]: Began executing node model.fraud_pipeline.fraud_summary
+[0m08:11:05.986603 [debug] [Thread-3 (]: Began executing node test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6
+[0m08:11:05.987613 [debug] [Thread-4 (]: Began executing node test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865
+[0m08:11:05.988154 [debug] [Thread-1 (]: Finished running node model.fraud_pipeline.fraud_features
+[0m08:11:05.989155 [debug] [Thread-2 (]: Finished running node model.fraud_pipeline.fraud_summary
+[0m08:11:05.990156 [debug] [Thread-3 (]: Finished running node test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6
+[0m08:11:05.991192 [debug] [Thread-4 (]: Finished running node test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865
+[0m08:11:05.991192 [debug] [Thread-1 (]: Began running node test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395
+[0m08:11:05.992195 [debug] [Thread-2 (]: Began running node test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d
+[0m08:11:05.992195 [debug] [Thread-3 (]: Began running node test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc
+[0m08:11:05.993969 [debug] [Thread-4 (]: Began running node test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4
+[0m08:11:05.994975 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.fraud_features, now test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395)
+[0m08:11:05.995480 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.fraud_pipeline.fraud_summary, now test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d)
+[0m08:11:05.996486 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.accepted_values_stg_transactions_is_fraud__0__1.f6d9ff0fc6, now test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc)
+[0m08:11:05.996486 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.accepted_values_stg_transactions_product_cd__W__H__C__S__R.3c40417865, now test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4)
+[0m08:11:05.997486 [debug] [Thread-1 (]: Began compiling node test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395
+[0m08:11:05.998485 [debug] [Thread-2 (]: Began compiling node test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d
+[0m08:11:05.999486 [debug] [Thread-3 (]: Began compiling node test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc
+[0m08:11:05.999486 [debug] [Thread-4 (]: Began compiling node test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4
+[0m08:11:06.004900 [debug] [Thread-1 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395"
+[0m08:11:06.009480 [debug] [Thread-2 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d"
+[0m08:11:06.014415 [debug] [Thread-3 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc"
+[0m08:11:06.014415 [debug] [Thread-4 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4"
+[0m08:11:06.020548 [debug] [Thread-1 (]: Began executing node test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395
+[0m08:11:06.020548 [debug] [Thread-2 (]: Began executing node test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d
+[0m08:11:06.022601 [debug] [Thread-3 (]: Began executing node test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc
+[0m08:11:06.022601 [debug] [Thread-1 (]: Finished running node test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395
+[0m08:11:06.022601 [debug] [Thread-4 (]: Began executing node test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4
+[0m08:11:06.022601 [debug] [Thread-2 (]: Finished running node test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d
+[0m08:11:06.026252 [debug] [Thread-3 (]: Finished running node test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc
+[0m08:11:06.026859 [debug] [Thread-1 (]: Began running node test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396
+[0m08:11:06.026859 [debug] [Thread-4 (]: Finished running node test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4
+[0m08:11:06.029806 [debug] [Thread-2 (]: Began running node test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779
+[0m08:11:06.029806 [debug] [Thread-3 (]: Began running node test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa
+[0m08:11:06.029806 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.not_null_stg_transactions_is_fraud.c832a79395, now test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396)
+[0m08:11:06.029806 [debug] [Thread-4 (]: Began running node test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5
+[0m08:11:06.029806 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.not_null_stg_transactions_product_cd.459e1ef75d, now test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779)
+[0m08:11:06.029806 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.not_null_stg_transactions_transaction_amt.b1c5fae0bc, now test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa)
+[0m08:11:06.029806 [debug] [Thread-1 (]: Began compiling node test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396
+[0m08:11:06.036122 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.not_null_stg_transactions_transaction_id.1d00a8e2e4, now test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5)
+[0m08:11:06.036753 [debug] [Thread-2 (]: Began compiling node test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779
+[0m08:11:06.036753 [debug] [Thread-3 (]: Began compiling node test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa
+[0m08:11:06.043906 [debug] [Thread-1 (]: Writing injected SQL for node "test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396"
+[0m08:11:06.045014 [debug] [Thread-4 (]: Began compiling node test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5
+[0m08:11:06.114496 [debug] [Thread-2 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779"
+[0m08:11:06.120974 [debug] [Thread-3 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa"
+[0m08:11:06.129602 [debug] [Thread-4 (]: Writing injected SQL for node "test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5"
+[0m08:11:06.129602 [debug] [Thread-1 (]: Began executing node test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396
+[0m08:11:06.129602 [debug] [Thread-2 (]: Began executing node test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779
+[0m08:11:06.136791 [debug] [Thread-3 (]: Began executing node test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa
+[0m08:11:06.136791 [debug] [Thread-1 (]: Finished running node test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396
+[0m08:11:06.138840 [debug] [Thread-4 (]: Began executing node test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5
+[0m08:11:06.138840 [debug] [Thread-2 (]: Finished running node test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779
+[0m08:11:06.142490 [debug] [Thread-3 (]: Finished running node test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa
+[0m08:11:06.144092 [debug] [Thread-1 (]: Began running node test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7
+[0m08:11:06.146134 [debug] [Thread-4 (]: Finished running node test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5
+[0m08:11:06.147128 [debug] [Thread-2 (]: Began running node test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d
+[0m08:11:06.150117 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.unique_stg_transactions_transaction_id.ee9a78a396, now test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7)
+[0m08:11:06.151174 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.fraud_pipeline.not_null_fraud_features_is_fraud.0dc3893779, now test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d)
+[0m08:11:06.151174 [debug] [Thread-1 (]: Began compiling node test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7
+[0m08:11:06.151174 [debug] [Thread-2 (]: Began compiling node test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d
+[0m08:11:06.156378 [debug] [Thread-1 (]: Writing injected SQL for node "test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7"
+[0m08:11:06.164900 [debug] [Thread-2 (]: Writing injected SQL for node "test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d"
+[0m08:11:06.164900 [debug] [Thread-1 (]: Began executing node test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7
+[0m08:11:06.164900 [debug] [Thread-2 (]: Began executing node test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d
+[0m08:11:06.164900 [debug] [Thread-1 (]: Finished running node test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7
+[0m08:11:06.164900 [debug] [Thread-2 (]: Finished running node test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d
+[0m08:11:06.172661 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m08:11:06.172661 [debug] [MainThread]: Connection 'list_fraud_main' was properly closed.
+[0m08:11:06.172661 [debug] [MainThread]: Connection 'test.fraud_pipeline.accepted_values_fraud_summary_grain__daily__product__card_type__email_domain__hour_of_day.5b892affb7' was properly closed.
+[0m08:11:06.172661 [debug] [MainThread]: Connection 'test.fraud_pipeline.not_null_fraud_summary_grain.0977a6d20d' was properly closed.
+[0m08:11:06.172661 [debug] [MainThread]: Connection 'test.fraud_pipeline.not_null_fraud_features_transaction_id.8a2a34d8fa' was properly closed.
+[0m08:11:06.172661 [debug] [MainThread]: Connection 'test.fraud_pipeline.unique_fraud_features_transaction_id.5238773fa5' was properly closed.
+[0m08:11:06.180574 [debug] [MainThread]: Command end result
+[0m08:11:06.216113 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\manifest.json
+[0m08:11:06.219113 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\semantic_manifest.json
+[0m08:11:06.229837 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project\target\run_results.json
+[0m08:11:06.229837 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 3 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m08:11:06.229837 [debug] [MainThread]: Command `dbt compile` succeeded at 08:11:06.229837 after 6.81 seconds
+[0m08:11:06.229837 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525BF5F0D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525E9109D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002525E912140>]}
+[0m08:11:06.229837 [debug] [MainThread]: Flushing usage events
+[0m08:11:07.140791 [debug] [MainThread]: An error was encountered while trying to flush usage events

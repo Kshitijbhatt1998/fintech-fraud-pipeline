@@ -1,0 +1,15 @@
+[0m08:10:48.516547 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001ECEC39F0A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001ECED623BB0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001ECED6239A0>]}
+
+
+============================== 08:10:48.534478 | 9c559a0a-e9fc-4b54-9f97-f208d294363a ==============================
+[0m08:10:48.534478 [info ] [MainThread]: Running with dbt=1.11.7
+[0m08:10:48.534478 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt compile --profiles-dir .', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m08:10:48.536623 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\Project ideas\fintech-fraud-pipeline\fintech-fraud-pipeline\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m08:10:48.536623 [debug] [MainThread]: Command `dbt compile` failed at 08:10:48.536623 after 0.19 seconds
+[0m08:10:48.541252 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001ECEC39F0A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001ECED623D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001ECED623C70>]}
+[0m08:10:48.542274 [debug] [MainThread]: Flushing usage events
+[0m08:10:49.486746 [debug] [MainThread]: An error was encountered while trying to flush usage events
