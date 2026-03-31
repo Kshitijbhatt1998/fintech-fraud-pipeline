@@ -1,0 +1,102 @@
+name: dbt Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'dbt_project/**'
+      - 'src/ingest_data.py'
+      - 'requirements.txt'
+
+jobs:
+  dbt-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download sample test data
+        run: |
+          python - << 'PYEOF'
+          import pandas as pd
+          import numpy as np
+          import os
+
+          os.makedirs('data/raw', exist_ok=True)
+          np.random.seed(42)
+          n = 5000
+
+          # Minimal transaction CSV matching real schema
+          tx = pd.DataFrame({
+              'TransactionID': range(1000000, 1000000 + n),
+              'TransactionDT': np.random.randint(86400, 15811200, n),
+              'TransactionAmt': np.random.lognormal(4.5, 1.2, n).round(2),
+              'ProductCD': np.random.choice(['W','H','C','S','R'], n),
+              'isFraud': np.random.choice([0, 1], n, p=[0.965, 0.035]),
+              'card1': np.random.randint(1000, 9999, n),
+              'card2': np.random.randint(100, 999, n),
+              'card3': np.random.choice([100.0, 150.0, 185.0], n),
+              'card4': np.random.choice(['visa','mastercard','american express','discover'], n),
+              'card5': np.random.choice([102.0, 117.0, 226.0], n),
+              'card6': np.random.choice(['debit','credit','charge card'], n),
+              'addr1': np.random.randint(100, 500, n).astype(float),
+              'addr2': np.random.choice([87.0, 96.0], n),
+              'dist1': np.random.exponential(50, n),
+              'dist2': np.random.exponential(30, n),
+              'P_emaildomain': np.random.choice(['gmail.com','outlook.com','yahoo.com',None], n),
+              'R_emaildomain': np.random.choice(['gmail.com','hotmail.com',None], n),
+              **{f'C{i}': np.random.randint(0, 10, n).astype(float) for i in range(1, 15)},
+              **{f'D{i}': np.random.uniform(0, 500, n) for i in range(1, 16)},
+              **{f'M{i}': np.random.choice(['T','F',None], n) for i in range(1, 6)},
+              'M4': np.random.choice(['M0','M1','M2',None], n),
+              **{f'M{i}': np.random.choice(['T','F',None], n) for i in range(5, 10)},
+          })
+          tx.to_csv('data/raw/train_transaction.csv', index=False)
+
+          # Identity CSV
+          id_subset = np.random.choice(tx['TransactionID'].values, int(n*0.25), replace=False)
+          identity = pd.DataFrame({
+              'TransactionID': id_subset,
+              'id_01': np.random.uniform(-10, 0, len(id_subset)),
+              'id_02': np.random.uniform(0, 200000, len(id_subset)),
+              'id_03': np.random.uniform(0, 100, len(id_subset)),
+              'DeviceType': np.random.choice(['desktop','mobile'], len(id_subset)),
+              'DeviceInfo': np.random.choice(['Windows','MacOS','iOS','Android'], len(id_subset)),
+          })
+          identity.to_csv('data/raw/train_identity.csv', index=False)
+          print(f"Generated {n} transactions, {len(id_subset)} identity records")
+          PYEOF
+
+      - name: Run ingestion
+        run: python src/ingest_data.py
+
+      - name: Run dbt models
+        working-directory: dbt_project
+        run: dbt run
+
+      - name: Run dbt tests
+        working-directory: dbt_project
+        run: dbt test
+
+      - name: Report row counts
+        run: |
+          python - << 'PYEOF'
+          import duckdb
+          con = duckdb.connect('data/fraud.duckdb', read_only=True)
+          for table in ['clean_transactions', 'fraud_features', 'fraud_summary']:
+              count = con.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
+              print(f'{table}: {count:,} rows')
+          con.close()
+          PYEOF

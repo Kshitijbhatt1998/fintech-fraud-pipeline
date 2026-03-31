@@ -88,6 +88,21 @@ Beyond raw columns, this pipeline adds:
 
 ---
 
+## Dashboard Preview
+
+> **[Add GIF here]** — Record with [ScreenToGif](https://www.screentogif.com/) (Windows) or `brew install --cask licecap` (macOS). Aim for 30 seconds covering Risk Breakdown → Model Performance tabs.
+
+<!--
+To add your GIF:
+1. Record dashboard with ScreenToGif or LICEcap
+2. Save as `docs/dashboard-preview.gif`
+3. Replace the line below with: ![Dashboard Preview](./docs/dashboard-preview.gif)
+-->
+
+![Dashboard Preview](./docs/dashboard-preview.gif)
+
+---
+
 ## Tech Stack
 
 | Layer | Tool |

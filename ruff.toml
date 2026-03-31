@@ -1,0 +1,30 @@
+# ruff.toml — Python linter config for fintech-fraud-pipeline
+# Place in project root
+
+[lint]
+# Rules enabled
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes (undefined names, unused imports)
+    "W",   # pycodestyle warnings
+    "I",   # isort (import ordering)
+    "UP",  # pyupgrade (modern Python syntax)
+]
+
+# Rules disabled — common in data science / ML code
+ignore = [
+    "E501",  # line too long — SQL strings and feature lists are long by nature
+    "F841",  # local variable assigned but never used — common in notebook-style scripts
+    "E741",  # ambiguous variable names — 'l', 'O' appear in feature names (C1, D1 etc.)
+    "UP007", # use X | Y for union types — keep 3.9 compat syntax
+]
+
+[lint.per-file-ignores]
+"src/dashboard.py" = [
+    "F401",  # unused imports — Streamlit pattern imports are used implicitly
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
