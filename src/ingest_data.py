@@ -5,7 +5,7 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 
-from src.monitoring import setup_monitoring, capture_exception
+from src.monitoring import capture_exception, setup_monitoring
 
 log = setup_monitoring('ingest')
 

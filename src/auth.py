@@ -7,7 +7,7 @@ Authorization model:
   - Password reset tokens are issued by Supabase and expire per their JWT policy (default 1 h).
 
 Environment variables:
-  SUPABASE_URL       — e.g. https://xyzcompany.supabase.co
+  SUPABASE_URL       — e.g. https://YOUR-PROJECT-REF.supabase.co
   SUPABASE_ANON_KEY  — public anon key (safe to expose to browser)
 
 Dev mode (no env vars set):

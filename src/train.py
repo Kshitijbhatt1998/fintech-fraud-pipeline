@@ -9,24 +9,24 @@ Outputs:    models/xgb_fraud_v1.pkl
             MLflow experiment: fraud_detection
 """
 
-import duckdb
-import numpy as np
-import pandas as pd
 import pickle
-import logging
 from pathlib import Path
 
+import duckdb
 import mlflow
 import mlflow.xgboost
+import numpy as np
+import pandas as pd
 import xgboost as xgb
-from sklearn.model_selection import TimeSeriesSplit, cross_val_score
 from sklearn.metrics import (
-    roc_auc_score, average_precision_score,
-    classification_report, confusion_matrix
+    average_precision_score,
+    classification_report,
+    roc_auc_score,
 )
+from sklearn.model_selection import TimeSeriesSplit
 from sklearn.preprocessing import LabelEncoder
 
-from src.monitoring import setup_monitoring, capture_exception, capture_message
+from src.monitoring import capture_exception, capture_message, setup_monitoring
 
 log = setup_monitoring('train')
 

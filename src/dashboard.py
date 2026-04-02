@@ -26,15 +26,15 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-from sklearn.metrics import roc_curve, auc, confusion_matrix
+from sklearn.metrics import auc, confusion_matrix, roc_curve
 
-# ── Monitoring must be initialized before anything else ───────────────────────
-from src.monitoring import setup_monitoring, capture_exception
-logger = setup_monitoring('dashboard')
-
-# ── Auth ──────────────────────────────────────────────────────────────────────
 from src.auth import require_auth, sign_out
+from src.monitoring import capture_exception, setup_monitoring
 from src.rate_limit import check_rate_limit
+
+# Monitoring must be initialized before st.set_page_config so Sentry
+# captures any import-time errors in the modules above.
+logger = setup_monitoring('dashboard')
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 ROOT       = Path(__file__).resolve().parent.parent

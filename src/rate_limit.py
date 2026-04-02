@@ -18,8 +18,8 @@ Usage:
         st.stop()
 """
 
-import time
 import logging
+import time
 
 import streamlit as st
 
