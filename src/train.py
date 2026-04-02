@@ -26,8 +26,9 @@ from sklearn.metrics import (
 )
 from sklearn.preprocessing import LabelEncoder
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
-log = logging.getLogger(__name__)
+from src.monitoring import setup_monitoring, capture_exception, capture_message
+
+log = setup_monitoring('train')
 
 # ─── Paths ────────────────────────────────────────────────────────────────────
 ROOT       = Path(__file__).resolve().parent.parent
@@ -219,4 +220,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as exc:
+        capture_exception(exc, {'script': 'train'})
+        capture_message(f'Training failed: {exc}', level='error')
+        raise

@@ -1,0 +1,29 @@
+[server]
+# Reject requests from other origins — prevents embedding in arbitrary iframes.
+# Set to false only if you're behind a trusted reverse proxy that handles CORS.
+enableCORS = false
+
+# CSRF protection for WebSocket connections
+enableXsrfProtection = true
+
+# Cap file upload size (MB) — protects against large-payload abuse
+maxUploadSize = 10
+
+# Cap incoming WebSocket message size (MB)
+maxMessageSize = 200
+
+# Collect no usage stats
+[browser]
+gatherUsageStats = false
+
+[runner]
+# Rerun only changed fragments instead of the full script (pairs with @st.fragment)
+fastReruns = true
+
+[theme]
+base = "dark"
+primaryColor         = "#4C72B0"
+backgroundColor      = "#0f1117"
+secondaryBackgroundColor = "#1a1d27"
+textColor            = "#e8eaf0"
+font = "sans serif"

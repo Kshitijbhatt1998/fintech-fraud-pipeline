@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Fraud Detection Pipeline</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>" />
+  <style>
+    :root { --bg:#0f1117; --surface:#1a1d27; --border:#2a2d3a; --text:#e8eaf0; --muted:#9098b1; --accent:#4c72b0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .container{max-width:740px;margin:0 auto;padding:48px 24px}
+    nav{border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:16px}
+    nav a{color:var(--muted);text-decoration:none;font-size:0.9rem}
+    nav a:hover{color:var(--text)}
+    h1{font-size:2rem;font-weight:800;margin-bottom:8px}
+    .updated{color:var(--muted);font-size:0.85rem;margin-bottom:40px}
+    h2{font-size:1.1rem;font-weight:700;margin:36px 0 10px}
+    p{color:#c8ccd8;margin-bottom:14px}
+    ul{color:#c8ccd8;padding-left:20px;margin-bottom:14px}
+    ul li{margin-bottom:6px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--muted);font-size:0.82rem;margin-top:48px}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">&larr; Home</a>
+  <a href="terms.html">Terms of Service</a>
+</nav>
+
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: April 2, 2025</p>
+
+  <p>
+    This Privacy Policy describes how the Fraud Detection Pipeline project
+    ("we", "us", or "our") handles information when you visit our landing page
+    or use the analytics dashboard.
+  </p>
+
+  <h2>1. What This Project Is</h2>
+  <p>
+    The Fraud Detection Pipeline is a portfolio / research project demonstrating
+    an end-to-end machine learning pipeline for financial fraud detection. It uses
+    the publicly available
+    <a href="https://www.kaggle.com/c/ieee-fraud-detection" target="_blank" rel="noopener">
+      IEEE-CIS Fraud Detection dataset
+    </a>
+    — no real customer financial data is processed.
+  </p>
+
+  <h2>2. Information We Collect</h2>
+  <ul>
+    <li>
+      <strong>Analytics events</strong> — if PostHog is configured, we collect
+      anonymous page-view and interaction events (e.g., which dashboard tab you
+      visited). No personally identifiable information (PII) is attached to these events.
+    </li>
+    <li>
+      <strong>Authentication data</strong> — if you create an account via Supabase,
+      your email address and encrypted password hash are stored by Supabase in
+      accordance with their
+      <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+      We do not store passwords ourselves.
+    </li>
+    <li>
+      <strong>Error reports</strong> — if Sentry is configured, anonymized error
+      stack traces are sent to Sentry to help us fix bugs. PII transmission is
+      explicitly disabled (<code>send_default_pii=False</code>).
+    </li>
+    <li>
+      <strong>Log files</strong> — server-side logs record timestamps and
+      anonymized session events for debugging. Logs are rotated and deleted after
+      30 days.
+    </li>
+  </ul>
+
+  <h2>3. How We Use Your Information</h2>
+  <ul>
+    <li>To authenticate you and control access to the dashboard.</li>
+    <li>To debug application errors and improve reliability.</li>
+    <li>To understand aggregate usage patterns (anonymous analytics only).</li>
+  </ul>
+  <p>We do not sell, rent, or share your information with third parties for marketing.</p>
+
+  <h2>4. Third-Party Services</h2>
+  <ul>
+    <li><strong>Supabase</strong> — authentication and user storage (<a href="https://supabase.com/privacy" target="_blank" rel="noopener">privacy policy</a>)</li>
+    <li><strong>Sentry</strong> — error monitoring (<a href="https://sentry.io/privacy/" target="_blank" rel="noopener">privacy policy</a>)</li>
+    <li><strong>PostHog</strong> — product analytics (<a href="https://posthog.com/privacy" target="_blank" rel="noopener">privacy policy</a>)</li>
+  </ul>
+
+  <h2>5. Data Retention</h2>
+  <p>
+    Account data is retained until you request deletion. Analytics and error
+    data are retained for 90 days. Log files are rotated after 30 days.
+  </p>
+
+  <h2>6. Your Rights</h2>
+  <p>
+    You may request deletion of your account and associated data at any time by
+    contacting us at the email below. For Supabase-stored data, you may also
+    submit a deletion request directly through Supabase.
+  </p>
+
+  <h2>7. Security</h2>
+  <p>
+    Passwords are hashed by Supabase using bcrypt. All data in transit is
+    encrypted via HTTPS/TLS. The analytics dashboard is read-only and serves
+    no real financial transaction data.
+  </p>
+
+  <h2>8. Children's Privacy</h2>
+  <p>
+    This project is not directed at children under 13. We do not knowingly
+    collect data from children.
+  </p>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>
+    We may update this policy periodically. The "Last updated" date at the top
+    of this page will reflect any changes.
+  </p>
+
+  <h2>10. Contact</h2>
+  <p>
+    Questions about this privacy policy?
+    Open an issue on
+    <a href="https://github.com/Kshitijbhatt1998/fintech-fraud-pipeline" target="_blank" rel="noopener">GitHub</a>.
+  </p>
+</div>
+
+<footer>
+  <a href="index.html">Home</a> &middot;
+  <a href="terms.html">Terms</a> &middot;
+  &copy; 2025 Kshitij Bhatt
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+# https://your-domain.com/robots.txt
+# Update the Sitemap URL to your actual domain before deploying.
+
+User-agent: *
+Allow: /
+
+# Keep the Streamlit dashboard path out of search indexes
+# (replace with your actual Streamlit subdomain/path if applicable)
+Disallow: /dashboard/
+
+Sitemap: https://your-domain.com/sitemap.xml

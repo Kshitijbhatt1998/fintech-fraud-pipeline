@@ -1,0 +1,172 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      rollback_sha:
+        description: "Git SHA to roll back to (leave empty for latest)"
+        required: false
+        default: ""
+
+jobs:
+  # ── 1. Validate before deploying ───────────────────────────────────────────
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check src/
+
+      - name: Generate synthetic test data
+        run: python .github/scripts/gen_test_data.py
+
+      - name: Run dbt tests
+        working-directory: dbt_project
+        run: |
+          dbt deps
+          dbt run --profiles-dir .
+          dbt test --profiles-dir .
+
+  # ── 2. Build & tag Docker image ────────────────────────────────────────────
+  build:
+    name: Build Image
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+      sha_tag: ghcr.io/${{ github.repository_owner }}/fraud-pipeline:${{ github.sha }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/fraud-pipeline
+          tags: |
+            type=sha,format=long
+            type=ref,event=branch
+            latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ── 3. Deploy to production ────────────────────────────────────────────────
+  deploy:
+    name: Deploy to Production
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: production
+      cancel-in-progress: false   # never cancel an in-flight deploy
+
+    steps:
+      - name: Determine target SHA
+        id: target
+        run: |
+          if [ -n "${{ github.event.inputs.rollback_sha }}" ]; then
+            echo "sha=${{ github.event.inputs.rollback_sha }}" >> "$GITHUB_OUTPUT"
+            echo "Rollback requested to ${{ github.event.inputs.rollback_sha }}"
+          else
+            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+            echo "Deploying latest: ${{ github.sha }}"
+          fi
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key:      ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+            IMAGE="ghcr.io/${{ github.repository_owner }}/fraud-pipeline:${{ steps.target.outputs.sha }}"
+
+            echo "==> Pulling $IMAGE"
+            docker pull "$IMAGE"
+
+            echo "==> Saving current container as rollback target"
+            PREV=$(docker inspect --format='{{.Image}}' fraud-pipeline 2>/dev/null || echo "none")
+            echo "$PREV" > /opt/fraud-pipeline/rollback_image
+
+            echo "==> Stopping old container"
+            docker stop fraud-pipeline || true
+            docker rm   fraud-pipeline || true
+
+            echo "==> Starting new container"
+            docker run -d \
+              --name fraud-pipeline \
+              --restart unless-stopped \
+              -p 8501:8501 \
+              --env-file /opt/fraud-pipeline/.env \
+              -v /opt/fraud-pipeline/data:/app/data \
+              -v /opt/fraud-pipeline/models:/app/models \
+              -v /opt/fraud-pipeline/logs:/app/logs \
+              "$IMAGE"
+
+            echo "==> Waiting for health check"
+            sleep 10
+            if ! curl -sf http://localhost:8501/_stcore/health; then
+              echo "!!! Health check failed — rolling back"
+              docker stop fraud-pipeline || true
+              docker rm   fraud-pipeline || true
+              PREV_IMAGE=$(cat /opt/fraud-pipeline/rollback_image)
+              docker run -d \
+                --name fraud-pipeline \
+                --restart unless-stopped \
+                -p 8501:8501 \
+                --env-file /opt/fraud-pipeline/.env \
+                -v /opt/fraud-pipeline/data:/app/data \
+                -v /opt/fraud-pipeline/models:/app/models \
+                -v /opt/fraud-pipeline/logs:/app/logs \
+                "$PREV_IMAGE"
+              echo "Rolled back to $PREV_IMAGE"
+              exit 1
+            fi
+
+            echo "==> Deployment successful: $IMAGE"
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Deployment failed for `${{ github.sha }}` — automatic rollback executed.'
+            }).catch(() => {});
+            // Sentry release tracking (optional)
+            // curl -sX POST https://sentry.io/api/0/organizations/ORG/releases/ ...

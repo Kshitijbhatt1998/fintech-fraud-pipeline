@@ -18,3 +18,15 @@ plotly>=5.20.0
 
 # Utilities
 python-dotenv>=1.0.0
+
+# ── Monitoring & observability ────────────────────────────────────────────────
+# Error tracking — remove if not using Sentry (set SENTRY_DSN env var to enable)
+sentry-sdk>=2.0.0
+
+# ── Auth (optional — remove if not using Supabase auth) ──────────────────────
+# Set SUPABASE_URL + SUPABASE_ANON_KEY env vars to enable the login gate
+supabase>=2.3.0
+
+# ── Analytics (optional — remove if not using PostHog) ───────────────────────
+# Set POSTHOG_API_KEY env var to enable server-side event tracking
+posthog>=3.5.0
