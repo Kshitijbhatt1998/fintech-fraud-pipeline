@@ -13,9 +13,8 @@ scikit-learn>=1.4.0
 mlflow>=2.10.0
 
 # Dashboard
-streamlit>=1.35.0
+streamlit>=1.37.0
 plotly>=5.20.0
 
 # Utilities
 python-dotenv>=1.0.0
-pathlib2>=2.3.0

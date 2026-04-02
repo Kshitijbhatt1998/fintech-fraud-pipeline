@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # Scan Python dependencies weekly
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    ignore:
+      # Only auto-update patch/minor; major bumps need manual review
+      - dependency-name: "xgboost"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "dbt-core"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "dbt-duckdb"
+        update-types: ["version-update:semver-major"]
+
+  # Scan GitHub Actions versions weekly
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies

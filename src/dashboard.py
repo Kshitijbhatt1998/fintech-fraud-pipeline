@@ -1,6 +1,10 @@
 """
 Fraud Detection Dashboard — Streamlit App
 
+Uses @st.fragment (Streamlit 1.37+) for island rendering:
+each tab is an independent UI island that rerenders without
+triggering the full app cycle.
+
 Usage:
     streamlit run src/dashboard.py
 
@@ -32,7 +36,8 @@ st.set_page_config(
 )
 
 # ─── Demo Banner ─────────────────────────────────────────────────────────────
-if not DB_PATH.exists():
+DEMO_MODE = not DB_PATH.exists()
+if DEMO_MODE:
     st.info(
         "**Demo Mode** — showing sample data. "
         "The full pipeline processes 590,540 real transactions with AUC 0.9791. "
@@ -40,19 +45,15 @@ if not DB_PATH.exists():
         icon="ℹ️"
     )
 
-# ─── Demo Mode Detection & Generators ─────────────────────────────────────────
-DEMO_MODE = not DB_PATH.exists()
-
+# ─── Demo Mode Generators ─────────────────────────────────────────────────────
 def get_demo_summary():
     """Realistic demo data matching actual pipeline results."""
-    import numpy as np
     np.random.seed(42)
-    
-    # Generate 'daily' summary
+
     dates = pd.date_range('2017-12-01', periods=180, freq='D')
     daily_txns = np.random.randint(2800, 6200, 180)
     daily_fraud_rate = np.random.uniform(0.025, 0.065, 180)
-    
+
     daily = pd.DataFrame({
         'grain': 'daily',
         'dim_value': dates.strftime('%Y-%m-%d'),
@@ -62,8 +63,7 @@ def get_demo_summary():
         'total_amt': daily_txns * np.random.uniform(80, 140, 180),
         'fraud_amt': daily_txns * daily_fraud_rate * np.random.uniform(90, 160, 180),
     })
-    
-    # Generate 'product' summary
+
     products = ['W', 'H', 'C', 'S', 'R']
     prod_txns = [280000, 120000, 80000, 50000, 30000]
     prod_rates = [2.5, 3.8, 10.5, 4.2, 5.0]
@@ -76,8 +76,7 @@ def get_demo_summary():
         'total_amt': [t * 100 for t in prod_txns],
         'fraud_amt': [int(t * r / 100 * 110) for t, r in zip(prod_txns, prod_rates)],
     })
-    
-    # Generate 'card_type' summary
+
     cards = ['debit', 'credit', 'charge card']
     card_rates = [2.5, 6.5, 1.2]
     card = pd.DataFrame({
@@ -85,40 +84,38 @@ def get_demo_summary():
         'dim_value': cards,
         'txn_count': [350000, 180000, 20000],
         'fraud_rate_pct': card_rates,
-        'fraud_count': [1, 1, 1], # dummy
-        'total_amt': [1, 1, 1], # dummy
-        'fraud_amt': [1, 1, 1], # dummy
+        'fraud_count': [1, 1, 1],
+        'total_amt': [1, 1, 1],
+        'fraud_amt': [1, 1, 1],
     })
-    
-    # Generate 'email_domain' summary
+
     emails = ['gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'anonymous.com']
     email = pd.DataFrame({
         'grain': 'email_domain',
         'dim_value': emails,
         'fraud_rate_pct': [2.8, 9.5, 12.2, 3.5, 5.1],
         'txn_count': [200000, 50000, 40000, 30000, 20000],
-        'fraud_count': [1, 1, 1, 1, 1], # dummy
-        'total_amt': [1, 1, 1, 1, 1], # dummy
-        'fraud_amt': [1, 1, 1, 1, 1], # dummy
+        'fraud_count': [1, 1, 1, 1, 1],
+        'total_amt': [1, 1, 1, 1, 1],
+        'fraud_amt': [1, 1, 1, 1, 1],
     })
 
-    # Generate 'hour_of_day' summary
-    hours = list(range(24))
     hour = pd.DataFrame({
         'grain': 'hour_of_day',
-        'dim_value': [str(h) for h in hours],
-        'fraud_rate_pct': [3 + np.sin(h/24 * 2 * np.pi) + np.random.normal(0, 0.5) for h in hours],
-        'txn_count': [5000 for _ in hours],
-        'fraud_count': [1 for _ in hours], # dummy
-        'total_amt': [1 for _ in hours], # dummy
-        'fraud_amt': [1 for _ in hours], # dummy
+        'dim_value': [str(h) for h in range(24)],
+        'fraud_rate_pct': [3 + np.sin(h / 24 * 2 * np.pi) + np.random.normal(0, 0.5)
+                           for h in range(24)],
+        'txn_count': [5000] * 24,
+        'fraud_count': [1] * 24,
+        'total_amt': [1] * 24,
+        'fraud_amt': [1] * 24,
     })
 
     return pd.concat([daily, product, card, email, hour], ignore_index=True)
 
+
 def get_demo_sample():
     """Demo transaction records."""
-    import numpy as np
     np.random.seed(123)
     n = 5000
     return pd.DataFrame({
@@ -138,8 +135,9 @@ def get_demo_sample():
         'hour_of_day': np.random.randint(0, 24, n),
         'day_of_week': np.random.randint(0, 7, n),
         'has_identity': np.random.choice([0, 1], n, p=[0.75, 0.25]),
-        'transaction_dt': pd.date_range('2017-12-01', periods=n, freq='30min').date
+        'transaction_dt': pd.date_range('2017-12-01', periods=n, freq='30min').date,
     })
+
 
 # ─── Data Loading ─────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300)
@@ -151,12 +149,15 @@ def load_summary():
     con.close()
     return df
 
+
 @st.cache_data(ttl=300)
-def load_sample(n=50_000):
-    """Load a sample of fraud_features for transaction explorer."""
+def load_sample(n: int = 50_000):
+    # Sanitize: clamp to safe bounds, reject non-integers
+    n = min(max(1, int(n)), 500_000)
     if DEMO_MODE:
         return get_demo_sample()
     con = duckdb.connect(str(DB_PATH), read_only=True)
+    # n is a validated integer — safe to interpolate
     df = con.execute(f"""
         SELECT
             transaction_id, transaction_ts, transaction_amt,
@@ -169,12 +170,10 @@ def load_sample(n=50_000):
     con.close()
     return df
 
+
 @st.cache_data(ttl=600)
 def load_model_data():
-    """Load model + holdout predictions for performance tab."""
     if DEMO_MODE:
-        # For demo, we don't return model data to trigger the warning which is fine
-        # Or we could return a mock model. Keeping it simple as per original logic.
         return None
     if not MODEL_PATH.exists():
         return None
@@ -193,47 +192,20 @@ def load_model_data():
     return artifact, df
 
 
-# ─── Sidebar ──────────────────────────────────────────────────────────────────
-with st.sidebar:
-    st.title('🔍 Fraud Pipeline')
-    st.caption('IEEE-CIS Dataset • XGBoost Model')
-    st.divider()
-    st.markdown('**Navigate:**')
-    tab_selection = st.radio('', ['Overview', 'Risk Breakdown', 'Model Performance', 'Transaction Explorer'],
-                             label_visibility='collapsed')
-
-# ─── Load data ────────────────────────────────────────────────────────────────
-try:
+# ─── Island: Overview ─────────────────────────────────────────────────────────
+@st.fragment
+def render_overview():
+    """Independent rendering island for the Overview tab."""
     summary = load_summary()
-    sample  = load_sample()
-    data_ok = True
-except Exception as e:
-    st.error(f'Could not connect to fraud.duckdb: {e}')
-    st.info('Run notebook 02_data_pipeline.ipynb and `dbt run` first.')
-    st.stop()
+    daily_df = summary[summary['grain'] == 'daily'].copy()
+    daily_df['dim_value'] = pd.to_datetime(daily_df['dim_value'])
+    daily_df = daily_df.sort_values('dim_value')
 
-# Pre-extract sub-dataframes
-daily_df    = summary[summary['grain'] == 'daily'].copy()
-daily_df['dim_value'] = pd.to_datetime(daily_df['dim_value'])
-daily_df = daily_df.sort_values('dim_value')
+    total_txns     = int(daily_df['txn_count'].sum())
+    total_fraud    = int(daily_df['fraud_count'].sum())
+    fraud_rate     = total_fraud / total_txns if total_txns else 0
+    total_fraud_amt = daily_df['fraud_amt'].sum()
 
-product_df  = summary[summary['grain'] == 'product']
-card_df     = summary[summary['grain'] == 'card_type']
-email_df    = summary[summary['grain'] == 'email_domain']
-hour_df     = summary[summary['grain'] == 'hour_of_day'].copy()
-hour_df['dim_value'] = hour_df['dim_value'].astype(int)
-hour_df = hour_df.sort_values('dim_value')
-
-# Overall KPIs
-total_txns    = int(daily_df['txn_count'].sum())
-total_fraud   = int(daily_df['fraud_count'].sum())
-fraud_rate    = total_fraud / total_txns if total_txns else 0
-total_fraud_amt = daily_df['fraud_amt'].sum()
-total_amt     = daily_df['total_amt'].sum()
-
-
-# ─── Tab: Overview ────────────────────────────────────────────────────────────
-if tab_selection == 'Overview':
     st.title('Fraud Detection — Overview')
 
     col1, col2, col3, col4 = st.columns(4)
@@ -244,17 +216,14 @@ if tab_selection == 'Overview':
 
     st.divider()
 
-    # Daily volume + fraud rate
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=daily_df['dim_value'], y=daily_df['txn_count'],
-        name='Total Transactions', marker_color='#4C72B0', opacity=0.7,
-        yaxis='y1'
+        name='Total Transactions', marker_color='#4C72B0', opacity=0.7, yaxis='y1',
     ))
     fig.add_trace(go.Scatter(
         x=daily_df['dim_value'], y=daily_df['fraud_rate_pct'],
-        name='Fraud Rate (%)', mode='lines', line=dict(color='#DD8452', width=2),
-        yaxis='y2'
+        name='Fraud Rate (%)', mode='lines', line=dict(color='#DD8452', width=2), yaxis='y2',
     ))
     fig.update_layout(
         title='Daily Transaction Volume & Fraud Rate',
@@ -266,7 +235,6 @@ if tab_selection == 'Overview':
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    # Daily fraud amount
     fig2 = px.area(
         daily_df, x='dim_value', y='fraud_amt',
         title='Daily Fraud Amount ($)',
@@ -277,8 +245,18 @@ if tab_selection == 'Overview':
     st.plotly_chart(fig2, use_container_width=True)
 
 
-# ─── Tab: Risk Breakdown ──────────────────────────────────────────────────────
-elif tab_selection == 'Risk Breakdown':
+# ─── Island: Risk Breakdown ───────────────────────────────────────────────────
+@st.fragment
+def render_risk_breakdown():
+    """Independent rendering island for the Risk Breakdown tab."""
+    summary    = load_summary()
+    product_df = summary[summary['grain'] == 'product']
+    card_df    = summary[summary['grain'] == 'card_type']
+    email_df   = summary[summary['grain'] == 'email_domain']
+    hour_df    = summary[summary['grain'] == 'hour_of_day'].copy()
+    hour_df['dim_value'] = hour_df['dim_value'].astype(int)
+    hour_df = hour_df.sort_values('dim_value')
+
     st.title('Risk Breakdown')
 
     col1, col2 = st.columns(2)
@@ -309,7 +287,6 @@ elif tab_selection == 'Risk Breakdown':
         fig.update_layout(height=350, plot_bgcolor='white', showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
-    # Email domain heatmap
     email_sorted = email_df.sort_values('fraud_rate_pct', ascending=True).tail(15)
     fig3 = px.bar(
         email_sorted, x='fraud_rate_pct', y='dim_value', orientation='h',
@@ -320,7 +297,6 @@ elif tab_selection == 'Risk Breakdown':
     fig3.update_layout(height=450, plot_bgcolor='white')
     st.plotly_chart(fig3, use_container_width=True)
 
-    # Hourly heatmap
     fig4 = px.bar(
         hour_df, x='dim_value', y='fraud_rate_pct',
         title='Fraud Rate by Hour of Day',
@@ -331,8 +307,10 @@ elif tab_selection == 'Risk Breakdown':
     st.plotly_chart(fig4, use_container_width=True)
 
 
-# ─── Tab: Model Performance ───────────────────────────────────────────────────
-elif tab_selection == 'Model Performance':
+# ─── Island: Model Performance ────────────────────────────────────────────────
+@st.fragment
+def render_model_performance():
+    """Independent rendering island for the Model Performance tab."""
     st.title('Model Performance')
 
     result = load_model_data()
@@ -341,11 +319,10 @@ elif tab_selection == 'Model Performance':
         st.stop()
 
     artifact, df = result
-    model = artifact['model']
+    model     = artifact['model']
     feat_cols = [c for c in artifact['feature_cols'] if c in df.columns]
 
-    # Holdout: last 20%
-    n = len(df)
+    n     = len(df)
     split = int(n * 0.8)
     X_hold = df[feat_cols].iloc[split:]
     y_hold = df['is_fraud'].iloc[split:]
@@ -365,18 +342,23 @@ elif tab_selection == 'Model Performance':
     left, right = st.columns(2)
 
     with left:
-        # ROC curve
         fig_roc = go.Figure()
-        fig_roc.add_trace(go.Scatter(x=fpr, y=tpr, mode='lines', name=f'XGBoost (AUC={roc_auc:.3f})',
-                                     line=dict(color='#DD8452', width=2)))
-        fig_roc.add_trace(go.Scatter(x=[0,1], y=[0,1], mode='lines', name='Random',
-                                     line=dict(color='gray', dash='dash')))
-        fig_roc.update_layout(title='ROC Curve', xaxis_title='FPR', yaxis_title='TPR',
-                               height=400, plot_bgcolor='white')
+        fig_roc.add_trace(go.Scatter(
+            x=fpr, y=tpr, mode='lines',
+            name=f'XGBoost (AUC={roc_auc:.3f})',
+            line=dict(color='#DD8452', width=2),
+        ))
+        fig_roc.add_trace(go.Scatter(
+            x=[0, 1], y=[0, 1], mode='lines', name='Random',
+            line=dict(color='gray', dash='dash'),
+        ))
+        fig_roc.update_layout(
+            title='ROC Curve', xaxis_title='FPR', yaxis_title='TPR',
+            height=400, plot_bgcolor='white',
+        )
         st.plotly_chart(fig_roc, use_container_width=True)
 
     with right:
-        # Confusion matrix
         cm = confusion_matrix(y_hold, preds)
         fig_cm = px.imshow(
             cm, text_auto=True,
@@ -388,10 +370,9 @@ elif tab_selection == 'Model Performance':
         fig_cm.update_layout(height=400)
         st.plotly_chart(fig_cm, use_container_width=True)
 
-    # Feature importance
     fi = pd.DataFrame({
         'feature': feat_cols,
-        'importance': model.feature_importances_
+        'importance': model.feature_importances_,
     }).sort_values('importance', ascending=False).head(20)
 
     fig_fi = px.bar(
@@ -399,20 +380,38 @@ elif tab_selection == 'Model Performance':
         title='Top 20 Feature Importances',
         color='importance', color_continuous_scale='Viridis',
     )
-    fig_fi.update_layout(height=500, plot_bgcolor='white', yaxis={'categoryorder': 'total ascending'})
+    fig_fi.update_layout(
+        height=500, plot_bgcolor='white',
+        yaxis={'categoryorder': 'total ascending'},
+    )
     st.plotly_chart(fig_fi, use_container_width=True)
 
 
-# ─── Tab: Transaction Explorer ────────────────────────────────────────────────
-elif tab_selection == 'Transaction Explorer':
+# ─── Island: Transaction Explorer ─────────────────────────────────────────────
+@st.fragment
+def render_transaction_explorer():
+    """Independent rendering island for the Transaction Explorer tab.
+
+    Widgets inside this fragment only trigger this fragment to rerender —
+    not the whole app. Filters use pandas .isin() on preset values pulled
+    from data, so there is no SQL injection surface here.
+    """
     st.title('Transaction Explorer')
-    st.caption(f'Showing most recent 50,000 transactions')
+
+    sample = load_sample()
+    st.caption(f'Showing most recent {len(sample):,} transactions')
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        product_filter = st.multiselect('Product Code', options=sorted(sample['product_cd'].dropna().unique()))
+        product_filter = st.multiselect(
+            'Product Code',
+            options=sorted(sample['product_cd'].dropna().unique()),
+        )
     with col2:
-        card_filter = st.multiselect('Card Type', options=sorted(sample['card6'].dropna().unique()))
+        card_filter = st.multiselect(
+            'Card Type',
+            options=sorted(sample['card6'].dropna().unique()),
+        )
     with col3:
         fraud_filter = st.selectbox('Show', ['All', 'Fraud only', 'Legitimate only'])
 
@@ -428,14 +427,59 @@ elif tab_selection == 'Transaction Explorer':
 
     st.write(f'{len(filtered):,} transactions match filters')
 
-    display_cols = ['transaction_id', 'transaction_ts', 'transaction_amt',
-                    'product_cd', 'card4', 'card6', 'purchaser_email_domain',
-                    'hour_of_day', 'has_identity', 'is_fraud']
+    display_cols = [
+        'transaction_id', 'transaction_ts', 'transaction_amt',
+        'product_cd', 'card4', 'card6', 'purchaser_email_domain',
+        'hour_of_day', 'has_identity', 'is_fraud',
+    ]
+    view = filtered[display_cols].rename(columns={'is_fraud': 'FRAUD'}).head(1000)
+
     st.dataframe(
-        filtered[display_cols].rename(columns={'is_fraud': 'FRAUD'}).head(1000),
+        view,
         use_container_width=True,
         column_config={
             'FRAUD': st.column_config.NumberColumn(format='%d', help='1=Fraud, 0=Legit'),
             'transaction_amt': st.column_config.NumberColumn(format='$%.2f'),
-        }
+        },
     )
+
+    # ── Download CTA ──────────────────────────────────────────────────────────
+    csv = view.to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label='Download filtered data (CSV)',
+        data=csv,
+        file_name='fraud_transactions_filtered.csv',
+        mime='text/csv',
+    )
+
+
+# ─── Sidebar ──────────────────────────────────────────────────────────────────
+with st.sidebar:
+    st.title('🔍 Fraud Pipeline')
+    st.caption('IEEE-CIS Dataset • XGBoost Model')
+    st.divider()
+    st.markdown('**Navigate:**')
+    tab_selection = st.radio(
+        '',
+        ['Overview', 'Risk Breakdown', 'Model Performance', 'Transaction Explorer'],
+        label_visibility='collapsed',
+    )
+
+# ─── Guard: verify data loads before rendering any island ─────────────────────
+try:
+    load_summary()
+    load_sample()
+except Exception as e:
+    st.error(f'Could not connect to fraud.duckdb: {e}')
+    st.info('Run `python src/ingest_data.py`, then `dbt run` first.')
+    st.stop()
+
+# ─── Dispatch to the active island ────────────────────────────────────────────
+if tab_selection == 'Overview':
+    render_overview()
+elif tab_selection == 'Risk Breakdown':
+    render_risk_breakdown()
+elif tab_selection == 'Model Performance':
+    render_model_performance()
+elif tab_selection == 'Transaction Explorer':
+    render_transaction_explorer()
