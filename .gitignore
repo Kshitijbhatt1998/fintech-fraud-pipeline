@@ -1,15 +1,26 @@
+# Data & model artifacts
 *.csv
 *.parquet
-__pycache__/
-.env
 *.pkl
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
 .ipynb_checkpoints/
 
-mlruns/
-models/*.pkl
-.claude/
+# Secrets — never commit these
+.env
+.kaggle/
 
+# Pipeline outputs
 mlruns/
 models/*.pkl
+data/fraud.duckdb
+logs/
+
+# IDE / tools
 .claude/
-eat: register XGBoost fraud detection models in MLflow and add IDE launch configurations/
+.vscode/
+.idea/

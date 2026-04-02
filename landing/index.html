@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fraud Detection Pipeline — Real-Time Financial Risk Intelligence</title>
+
+  <!-- ── Google Search Console verification ──────────────────────────────── -->
+  <!-- Replace content value with your actual GSC verification token -->
+  <meta name="google-site-verification" content="REPLACE_WITH_GSC_TOKEN" />
+
+  <!-- ── Open Graph ──────────────────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Fraud Detection Pipeline — Financial Risk Intelligence" />
+  <meta property="og:description" content="End-to-end ML pipeline detecting financial fraud across 590K+ transactions. XGBoost model with 97.91% AUC, built on dbt + DuckDB." />
+  <meta property="og:image"       content="https://your-domain.com/og-preview.png" />
+  <meta property="og:url"         content="https://your-domain.com" />
+  <meta property="og:site_name"   content="Fraud Detection Pipeline" />
+
+  <!-- ── Twitter Card ────────────────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Fraud Detection Pipeline — 97.91% AUC" />
+  <meta name="twitter:description" content="End-to-end ML pipeline: XGBoost + dbt + DuckDB analyzing 590K+ financial transactions." />
+  <meta name="twitter:image"       content="https://your-domain.com/og-preview.png" />
+
+  <!-- ── SEO ─────────────────────────────────────────────────────────────── -->
+  <meta name="description" content="End-to-end ML pipeline detecting financial fraud across 590K+ transactions with 97.91% AUC. Built with XGBoost, dbt, and DuckDB." />
+  <meta name="keywords"    content="fraud detection, machine learning, fintech, XGBoost, dbt, DuckDB, financial risk, AUC, data pipeline" />
+  <meta name="robots"      content="index, follow" />
+
+  <!-- ── Favicon (inline SVG) ─────────────────────────────────────────────── -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>" />
+
+  <style>
+    /* ── Reset + Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d27;
+      --border:    #2a2d3a;
+      --accent:    #4c72b0;
+      --accent-2:  #dd8452;
+      --danger:    #d62728;
+      --text:      #e8eaf0;
+      --muted:     #9098b1;
+      --radius:    12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────────────────── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(15, 17, 23, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ─────────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 96px 0 80px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(76, 114, 176, 0.15);
+      border: 1px solid rgba(76, 114, 176, 0.4);
+      color: #7a9ed4;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e8eaf0 0%, #9098b1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Stats ────────────────────────────────────────────────────────────── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 0 0 80px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.danger { color: var(--danger); }
+    .stat-value.orange { color: var(--accent-2); }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Features ─────────────────────────────────────────────────────────── */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover { border-color: var(--accent); }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Stack ────────────────────────────────────────────────────────────── */
+    .stack {
+      text-align: center;
+      padding: 48px 0 80px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    footer a { color: var(--muted); text-decoration: underline; }
+
+    /* ── Mobile ───────────────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero { padding: 64px 0 56px; }
+      .nav-links { display: none; }
+      .cta-group { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Nav ──────────────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="container inner">
+      <a class="logo" href="#">🔍 Fraud Pipeline</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="https://github.com/Kshitijbhatt1998/fintech-fraud-pipeline" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge">&#9650; Production ML Pipeline</div>
+      <h1>Financial Fraud Detection<br/>at Scale</h1>
+      <p class="hero-sub">
+        End-to-end ML pipeline analyzing 590,540 real transactions.
+        XGBoost model with 97.91% AUC — built on dbt + DuckDB.
+      </p>
+      <div class="cta-group">
+        <!-- Update this href to your deployed Streamlit URL -->
+        <a class="btn btn-primary" href="https://your-app.streamlit.app" target="_blank" rel="noopener">
+          Launch Dashboard &rarr;
+        </a>
+        <a class="btn btn-outline" href="https://github.com/Kshitijbhatt1998/fintech-fraud-pipeline" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats ─────────────────────────────────────────────────────────────── -->
+  <div class="container">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value accent">97.91%</div>
+        <div class="stat-label">AUC-ROC</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">590K+</div>
+        <div class="stat-label">Transactions</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value danger">3.5%</div>
+        <div class="stat-label">Fraud Rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value orange">58</div>
+        <div class="stat-label">Features Engineered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">5-fold</div>
+        <div class="stat-label">Time-Series CV</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Features ──────────────────────────────────────────────────────────── -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">What's Inside</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">&#128202;</div>
+          <h3>Live Dashboard</h3>
+          <p>Interactive Streamlit dashboard with daily fraud trends, risk breakdowns by product, card type, and email domain.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#129302;</div>
+          <h3>XGBoost Model</h3>
+          <p>58-feature gradient boosting classifier with time-series cross-validation, achieving 97.91% holdout AUC on IEEE-CIS data.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128295;</div>
+          <h3>dbt Pipeline</h3>
+          <p>Fully tested staging → mart SQL transformations with 12 built-in data quality tests and incremental materialization.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128202;</div>
+          <h3>MLflow Tracking</h3>
+          <p>Experiment tracking logs parameters, fold-level AUC scores, and model artifacts. Full auditability of every training run.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9889;</div>
+          <h3>DuckDB Backend</h3>
+          <p>In-process OLAP engine. No server required — query 590K transactions in milliseconds from a single portable file.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9997;</div>
+          <h3>CI/CD Tested</h3>
+          <p>GitHub Actions runs dbt tests and Python/SQL linting on every PR. No broken pipelines reach main.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stack ─────────────────────────────────────────────────────────────── -->
+  <section id="stack" class="stack">
+    <div class="container">
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="stack-pills">
+        <span class="pill">Python 3.10</span>
+        <span class="pill">XGBoost</span>
+        <span class="pill">scikit-learn</span>
+        <span class="pill">dbt-core</span>
+        <span class="pill">DuckDB</span>
+        <span class="pill">Streamlit</span>
+        <span class="pill">Plotly</span>
+        <span class="pill">MLflow</span>
+        <span class="pill">pandas</span>
+        <span class="pill">GitHub Actions</span>
+        <span class="pill">ruff</span>
+        <span class="pill">sqlfluff</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://github.com/Kshitijbhatt1998" target="_blank" rel="noopener">Kshitij Bhatt</a> &middot;
+         IEEE-CIS Fraud Detection dataset &middot;
+         <a href="https://github.com/Kshitijbhatt1998/fintech-fraud-pipeline" target="_blank" rel="noopener">View source</a>
+         &middot; <a href="privacy.html">Privacy</a>
+         &middot; <a href="terms.html">Terms</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ── PostHog Analytics ─────────────────────────────────────────────────── -->
+  <!--
+    Replace POSTHOG_API_KEY with your project API key from app.posthog.com.
+    Remove this block entirely if you prefer not to use analytics.
+    PostHog respects Do Not Track and is GDPR-compliant with proper config.
+  -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('POSTHOG_API_KEY', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      capture_pageview: true,
+      capture_pageleave: true,
+      respect_dnt: true,          // honour browser Do Not Track
+    });
+  </script>
+
+</body>
+</html>
